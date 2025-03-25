@@ -1,0 +1,7 @@
+.Rproj.user/
+
+# ignore data folder
+data/
+
+#ignore outputs folder
+outputs/
