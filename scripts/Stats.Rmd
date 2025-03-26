@@ -9,10 +9,38 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
 libraries
 ```{r : reading libraries, include= FALSE}
 packages <- c("tidyverse", "readxl", "dplyr", "magrittr", "mixtools", "emmeans", "readr","data.table", "lubridate", "ggplot2", "skimr", "ggstatsplot","summarytools", "knitr", "here", "ggthemes", "Amelia", "tidyr", "naniar", "stringr", "janitor")
 
 lapply(packages, library, character.only = TRUE)
 ```
+
+Want to achieve:
+- combine Nov23-Nov24 with Nov24-Feb25 (because Nov24-Feb25 only has 10 data points)
+- total daily standarised doses for each medication
+- flag HC daily dose <8mg and >20mg per BSA
+- add n number to stats
+- performs stats on all other numerical fields from minimal dataset (e.g.: height,         weight, BMI, renin, testosterone, glucose, BPs)
+- look at dose timings, per centre per drug
+- 17 ohp and andro lab values women vs men per centre
+- HC dose trends per centre (including individual doses and total daily doses)
+- blood pressure - spread of values for both diastolic vs systolic and subsequent        categories
+
+I have processed data in excel for now, so I'll start by reading that in here to use as a starting point for this analysis.
+
+
+```{r : reading in data}
+Nov22_Nov23_minimal_dataset <- read.csv("C:/Users/md1rwe/Documents/Data extractions from I-CAH/Feb 2025/SDM_stats/data/Nov22-Nov23.csv", header=T, na.strings= c("", "NA"))
+
+Nov23_Nov24_minimal_dataset <- read.csv("C:/Users/md1rwe/Documents/Data extractions from I-CAH/Feb 2025/SDM_stats/data/Nov23-Nov24.csv", header=T, na.strings= c("", "NA"))
+
+Nov24_Feb25_minimal_dataset <- read.csv("C:/Users/md1rwe/Documents/Data extractions from I-CAH/Feb 2025/SDM_stats/data/Feb25-Nov24.csv", header=T, na.strings= c("", "NA"))
+```
+
+
+
+
+
+
+
