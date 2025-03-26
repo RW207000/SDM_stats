@@ -5,3 +5,9 @@ data/
 
 #ignore outputs folder
 outputs/
+
+#ignore .RData
+.RData
+
+#ignore .Rhistory
+.Rhistory
