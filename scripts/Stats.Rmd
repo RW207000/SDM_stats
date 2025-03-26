@@ -80,33 +80,137 @@ Nov23_Feb25_minimal_dataset[Nov23_Feb25_minimal_dataset <=0] <- NA
 
 
 --- Statistical analysis ---
-Let's start with stats for total_standardised_daily_dose_per_BSA
-```{r : stats - total_standardised_daily_dose_per_BSA}
-# First for Nov22-Nov23
+I'm doing this one time frame at a time :)
 
+Let's start with stats for Nov22-Nov23
+```{r : total_standardised_daily_dose_per_BSA (22-23)}
 stats_Nov22_Nov23_dose_per_BSA <- Nov22_Nov23_minimal_dataset %>%
-  summarise("mean daily dose per BSA (22-23)" = mean(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
-            "median daily dose per BSA (22-23)" = median(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
-            "SD daily dose per BSA (22-23)" = sd(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
-            "min daily dose per BSA (22-23)" = min(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
-            "max daily dose per BSA (22-23)" = max(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
-            "n (22-23)" = length(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_BSA[!is.na(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_BSA)])) %>%
-  mutate_if(is.numeric, ~round(., 1))
+  summarise("mean" = mean(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
+            "median" = median(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
+            "SD" = sd(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
+            "min" = min(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
+            "max" = max(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
+            "n" = length(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_BSA[!is.na(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_BSA)])) %>%
+  mutate_if(is.numeric, ~round(., 2))
 
+## change shape of data frame
+stat_frame_Nov22_Nov23 <- data.frame(cbind(names(stats_Nov22_Nov23_dose_per_BSA), t(stats_Nov22_Nov23_dose_per_BSA)))
+stat_frame_Nov22_Nov23 <- select(stat_frame_Nov22_Nov23, -X1)
+colnames(stat_frame_Nov22_Nov23) <- c("total_standardised_daily_dose_per_BSA (mg)")
+```
+
+```{r : total_standardised_daily_dose_per_kg (22-23)}
+# Now for total_standardised_daily_dose_per_kg
+
+stats_Nov22_Nov23_dose_per_kg <- Nov22_Nov23_minimal_dataset %>%
+  summarise("mean" = mean(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_kg, na.rm = T),
+            "median" = median(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_kg, na.rm = T),
+            "SD" = sd(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_kg, na.rm = T),
+            "min" = min(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_kg, na.rm = T),
+            "max" = max(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_kg, na.rm = T),
+            "n" = length(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_kg[!is.na(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_kg)])) %>%
+  mutate_if(is.numeric, ~round(., 2))
+
+## change shape of data frame
+stat_frame_Nov22_Nov23_kg <- data.frame(cbind(names(stats_Nov22_Nov23_dose_per_kg), t(stats_Nov22_Nov23_dose_per_kg)))
+stat_frame_Nov22_Nov23_kg <- select(stat_frame_Nov22_Nov23_kg, -X1)
+colnames(stat_frame_Nov22_Nov23_kg) <- c("total_standardised_daily_dose_per_kg (mg)")
+
+
+# join per kg to main stat frame
+stat_frame_Nov22_Nov23$total_standardised_daily_dose_per_kg <- stat_frame_Nov22_Nov23_kg$`total_standardised_daily_dose_per_kg (mg)`
+```
+
+```{r : height (22-23)}
+# Now for height
+stats_Nov22_Nov23_height <- Nov22_Nov23_minimal_dataset %>%
+  summarise("mean" = mean(Nov22_Nov23_minimal_dataset$Height..cm., na.rm = T),
+            "median" = median(Nov22_Nov23_minimal_dataset$Height..cm., na.rm = T),
+            "SD" = sd(Nov22_Nov23_minimal_dataset$Height..cm., na.rm = T),
+            "min" = min(Nov22_Nov23_minimal_dataset$Height..cm., na.rm = T),
+            "max" = max(Nov22_Nov23_minimal_dataset$Height..cm., na.rm = T),
+            "n" = length(Nov22_Nov23_minimal_dataset$Height..cm.[!is.na(Nov22_Nov23_minimal_dataset$Height..cm.)])) %>%
+  mutate_if(is.numeric, ~round(., 2))
+
+## change shape of data frame
+stat_frame_Nov22_Nov23_height <- data.frame(cbind(names(stats_Nov22_Nov23_height), t(stats_Nov22_Nov23_height)))
+stat_frame_Nov22_Nov23_height <- select(stat_frame_Nov22_Nov23_height, -X1)
+colnames(stat_frame_Nov22_Nov23_height) <- c("Height (cm)")
+
+
+# join height to main stat frame
+stat_frame_Nov22_Nov23$"Height (cm)" <- stat_frame_Nov22_Nov23_height$"Height (cm)"
+```
+
+```{r : weight (22-23)}
+# Now for weight
+stats_Nov22_Nov23_weight <- Nov22_Nov23_minimal_dataset %>%
+  summarise("mean" = mean(Nov22_Nov23_minimal_dataset$Weight..kg., na.rm = T),
+            "median" = median(Nov22_Nov23_minimal_dataset$Weight..kg., na.rm = T),
+            "SD" = sd(Nov22_Nov23_minimal_dataset$Weight..kg., na.rm = T),
+            "min" = min(Nov22_Nov23_minimal_dataset$Weight..kg., na.rm = T),
+            "max" = max(Nov22_Nov23_minimal_dataset$Weight..kg., na.rm = T),
+            "n" = length(Nov22_Nov23_minimal_dataset$Weight..kg.[!is.na(Nov22_Nov23_minimal_dataset$Weight..kg.)])) %>%
+  mutate_if(is.numeric, ~round(., 2))
+
+## change shape of data frame
+stat_frame_Nov22_Nov23_weight <- data.frame(cbind(names(stats_Nov22_Nov23_weight), t(stats_Nov22_Nov23_weight)))
+stat_frame_Nov22_Nov23_weight <- select(stat_frame_Nov22_Nov23_weight, -X1)
+colnames(stat_frame_Nov22_Nov23_weight) <- c("Weight (kg)")
+
+
+# join height to main stat frame
+stat_frame_Nov22_Nov23$"Weight (kg)" <- stat_frame_Nov22_Nov23_weight$"Weight (kg)"
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
 # Then for Nov23-Feb25
 
 stats_Nov23_Feb25_dose_per_BSA <- Nov23_Feb25_minimal_dataset %>%
-  summarise("mean daily dose per BSA (23-25)" = mean(Nov23_Feb25_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
-            "median daily dose per BSA (23-25)" = median(Nov23_Feb25_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
-            "SD daily dose per BSA (23-25)" = sd(Nov23_Feb25_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
-            "min daily dose per BSA (23-25)" = min(Nov23_Feb25_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
-            "max daily dose per BSA (23-25)" = max(Nov23_Feb25_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
-            "n (23-25)" = length(Nov23_Feb25_minimal_dataset$total_standardised_daily_dose_per_BSA[!is.na(Nov23_Feb25_minimal_dataset$total_standardised_daily_dose_per_BSA)])) %>%
+  summarise("mean" = mean(Nov23_Feb25_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
+            "median" = median(Nov23_Feb25_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
+            "SD" = sd(Nov23_Feb25_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
+            "min" = min(Nov23_Feb25_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
+            "max" = max(Nov23_Feb25_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
+            "n" = length(Nov23_Feb25_minimal_dataset$total_standardised_daily_dose_per_BSA[!is.na(Nov23_Feb25_minimal_dataset$total_standardised_daily_dose_per_BSA)])) %>%
   mutate_if(is.numeric, ~round(., 1))
+
+
+##
+
+stat_frame2 <- data.frame(cbind(names(stats_Nov23_Feb25_dose_per_BSA), t(stats_Nov23_Feb25_dose_per_BSA)))
+stat_frame2 <- select(stat_frame2, -X1)
+colnames(stat_frame2) <- c("Nov23-Nov25 total_standardised_daily_dose_per_BSA")
+
+##
+stat_frame$"Nov23-Nov25 total_standardised_daily_dose_per_BSA" <- stat_frame2$`Nov23-Nov25 total_standardised_daily_dose_per_BSA`
+
 ```
+
 
 Now let's do total_standardised_daily_dose_per_kg
 ```{r: stats - total_standardised_daily_dose_per_kg}
+# First for Nov22-Nov23
+
+
 
 
 ```
