@@ -66,13 +66,13 @@ patients_per_centre_Nov23_Feb25 <- Nov23_Feb25_minimal_dataset %>%
   group_by(Centre.ID.x) %>%
   summarise("number of patients assessed 23-25" = n_unique(CO.ID.x))  
 
-# now join these two data frames together so all visit info is in one frame
+# Now join these two data frames together so all visit info is in one frame
 
 patients_per_centre <- full_join(patients_per_centre_Nov22_Nov23, patients_per_centre_Nov23_Feb25, by = "Centre.ID.x")
 ```
 
 ```{r : removing values of 0 from data frames}
-# I'm doing this because values of 0 indicate data is missing which is required for previous arithmetic
+# I'm doing this because values of 0 indicates data required for previous arithmetic (done in excel) is missing.
 
 Nov22_Nov23_minimal_dataset[Nov22_Nov23_minimal_dataset <=0] <- NA
 Nov23_Feb25_minimal_dataset[Nov23_Feb25_minimal_dataset <=0] <- NA
@@ -80,20 +80,36 @@ Nov23_Feb25_minimal_dataset[Nov23_Feb25_minimal_dataset <=0] <- NA
 
 
 --- Statistical analysis ---
-Let's start replicating analysis I did in Excel before moving on to novel analyses
+Let's start with stats for total_standardised_daily_dose_per_BSA
 ```{r : stats - total_standardised_daily_dose_per_BSA}
+# First for Nov22-Nov23
+
 stats_Nov22_Nov23_dose_per_BSA <- Nov22_Nov23_minimal_dataset %>%
-  summarise("mean daily dose per BSA" = mean(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
-            "median daily dose per BSA" = median(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
-            "SD daily dose per BSA" = sd(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
-            "min daily dose per BSA" = min(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
-            "max daily dose per BSA" = max(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T)) %>%
+  summarise("mean daily dose per BSA (22-23)" = mean(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
+            "median daily dose per BSA (22-23)" = median(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
+            "SD daily dose per BSA (22-23)" = sd(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
+            "min daily dose per BSA (22-23)" = min(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
+            "max daily dose per BSA (22-23)" = max(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
+            "n (22-23)" = length(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_BSA[!is.na(Nov22_Nov23_minimal_dataset$total_standardised_daily_dose_per_BSA)])) %>%
   mutate_if(is.numeric, ~round(., 1))
+
+# Then for Nov23-Feb25
+
+stats_Nov23_Feb25_dose_per_BSA <- Nov23_Feb25_minimal_dataset %>%
+  summarise("mean daily dose per BSA (23-25)" = mean(Nov23_Feb25_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
+            "median daily dose per BSA (23-25)" = median(Nov23_Feb25_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
+            "SD daily dose per BSA (23-25)" = sd(Nov23_Feb25_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
+            "min daily dose per BSA (23-25)" = min(Nov23_Feb25_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
+            "max daily dose per BSA (23-25)" = max(Nov23_Feb25_minimal_dataset$total_standardised_daily_dose_per_BSA, na.rm = T),
+            "n (23-25)" = length(Nov23_Feb25_minimal_dataset$total_standardised_daily_dose_per_BSA[!is.na(Nov23_Feb25_minimal_dataset$total_standardised_daily_dose_per_BSA)])) %>%
+  mutate_if(is.numeric, ~round(., 1))
+```
+
+Now let's do total_standardised_daily_dose_per_kg
+```{r: stats - total_standardised_daily_dose_per_kg}
 
 
 ```
-
-
 
 
 
