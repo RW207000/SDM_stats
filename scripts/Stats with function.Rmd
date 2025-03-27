@@ -137,11 +137,6 @@ return (statSummaryFrame)
 
 
 
-```
-
-
-
-
 
 
 
@@ -152,9 +147,8 @@ return (statSummaryFrame)
 TO USE THIS FUNCTION:
 nameof_df_youwant <- summariseStat("name of element", df that contains the element)
 
-```{r : making Nov22_Nov23 stat frames}
-
-#anthropometry
+```{r}
+# anthropometry
 height_22_23 <- summariseStat("Height..cm.", Nov22_Nov23_minimal_dataset)
 weight_22_23 <- summariseStat("Weight..kg.", Nov22_Nov23_minimal_dataset)
 BMI_22_23 <- summariseStat("BMI", Nov22_Nov23_minimal_dataset)
@@ -171,21 +165,8 @@ testosterone_22_23 <- summariseStat("Total.testosterone.value", Nov22_Nov23_mini
 andro_22_23 <- summariseStat("Androstenedione.value", Nov22_Nov23_minimal_dataset)
 ```
 
-
-```{r: trying to use function in pipe, for 'per centre' stats}
-test <- Nov22_Nov23_minimal_dataset %>%
-  group_by(Centre.ID.x) %>%
-  summarise(n = n())
-
-
-
-%>%
-  lapply(. %>% summariseStat("BMI"))
-
-```
-
 ```{r : joining stat frames}
-# StatFrame <- cbind(X, Y)
+anthropometry_stats_22_23 <- cbind(height_22_23, weight_22_23, Age_22_23, BMI_22_23, BSA_22_23, Sys.BP_22_23, Dias.BP_22_23)
 ```
 
 
