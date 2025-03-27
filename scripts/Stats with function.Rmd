@@ -108,8 +108,12 @@ Sys.BP_22_23 <- summariseStat("Systolic.Blood.Pressure", Nov22_Nov23_minimal_dat
 Dias.BP_22_23 <- summariseStat("Diastolic.Blood.Pressure", Nov22_Nov23_minimal_dataset)
 Age_22_23 <- summariseStat("Age", Nov22_Nov23_minimal_dataset)
 
-# medication
-
+# labs
+# these stats are for all data in the timeframe, both women and men combined.
+# to be useful, these need to be split into sex categories (and then into centres)
+plasma_renin_22_23 <- summariseStat("Renin.plasma.activity", Nov22_Nov23_minimal_dataset)
+testosterone_22_23 <- summariseStat("Total.testosterone.value", Nov22_Nov23_minimal_dataset)
+andro_22_23 <- summariseStat("Androstenedione.value", Nov22_Nov23_minimal_dataset)
 ```
 
 
