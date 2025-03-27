@@ -1,0 +1,129 @@
+---
+title: "Stats_with_function"
+author: "R.Welch"
+date: "2025-03-27"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+libraries
+```{r : reading libraries, include= FALSE}
+packages <- c("tidyverse", "readxl", "dplyr", "magrittr", "mixtools", "emmeans", "readr","data.table", "lubridate", "ggplot2", "skimr", "ggstatsplot","summarytools", "knitr", "here", "ggthemes", "Amelia", "tidyr", "naniar", "stringr", "janitor")
+
+lapply(packages, library, character.only = TRUE)
+```
+
+Want to achieve:
+- combine Nov23-Nov24 with Nov24-Feb25 (because Nov24-Feb25 only has 10 data points)
+- total daily standarised doses for each medication
+- flag HC daily dose <8mg and >20mg per BSA
+- add n number to stats
+- performs stats on all other numerical fields from minimal dataset (e.g.: height,         weight, BMI, renin, testosterone, glucose, BPs)
+- look at dose timings, per centre per drug
+- 17 ohp and andro lab values women vs men per centre
+- HC dose trends per centre (including individual doses and total daily doses)
+- blood pressure - spread of values for both diastolic vs systolic and subsequent        categories
+
+I have processed data in excel for now, so I'll start by reading that in here to use as a starting point for this analysis.
+
+
+```{r : reading in data}
+Nov22_Nov23_minimal_dataset <- read.csv("C:/Users/md1rwe/Documents/Data extractions from I-CAH/Feb 2025/SDM_stats/data/Nov22-Nov23.csv", header=T, na.strings= c("", "NA"))
+
+Nov23_Nov24_minimal_dataset <- read.csv("C:/Users/md1rwe/Documents/Data extractions from I-CAH/Feb 2025/SDM_stats/data/Nov23-Nov24.csv", header=T, na.strings= c("", "NA"))
+
+Nov24_Feb25_minimal_dataset <- read.csv("C:/Users/md1rwe/Documents/Data extractions from I-CAH/Feb 2025/SDM_stats/data/Feb25-Nov24.csv", header=T, na.strings= c("", "NA"))
+```
+
+
+Let's merge Nov23-Nov24 to Nov24-Feb25
+```{r : making Nov23-Feb25}
+Nov23_Feb25_minimal_dataset <- rbind(Nov23_Nov24_minimal_dataset, Nov24_Feb25_minimal_dataset)
+
+# remove the two now individual frames
+
+remove(Nov23_Nov24_minimal_dataset, Nov24_Feb25_minimal_dataset)
+```
+
+Let's format date fields properly
+```{r : formatting date fields}
+Nov22_Nov23_minimal_dataset$Date.of.Assessment <- as.Date(Nov22_Nov23_minimal_dataset$Date.of.Assessment, format = "%d/%m/%Y")
+
+Nov23_Feb25_minimal_dataset$Date.of.Assessment <- as.Date(Nov23_Feb25_minimal_dataset$Date.of.Assessment, format = "%d/%m/%Y")
+```
+
+Use this function to simplify making stats for numerical data in the minimal data set
+
+############################
+```{r}
+
+summariseStat <- function(statName, minimalDataset) {
+
+colNames <- names(minimalDataset)
+nameIdx <- colNames == statName
+
+if (sum(nameIdx) == 0) {
+  print(sum(nameIdx))
+  print("no variable with that name")
+  return (FALSE)
+}
+
+stat <- as.vector(minimalDataset[,nameIdx])
+
+StatSummary <- minimalDataset %>%
+  summarise("mean" = mean(stat, na.rm = T),
+            "median" = median(stat, na.rm = T),
+            "SD" = sd(stat, na.rm = T),
+            "min" = min(stat, na.rm = T),
+            "max" = max(stat, na.rm = T),
+            "n" = length(stat[!is.na(stat)])) %>%
+  mutate_if(is.numeric, ~round(., 2))
+
+print(StatSummary)
+
+## change shape of data frame
+statSummaryFrame <- data.frame(cbind(names(StatSummary), t(StatSummary)))
+statSummaryFrame <- select(statSummaryFrame, -X1)
+colnames(statSummaryFrame) <- c(statName)
+
+return (statSummaryFrame)
+
+}
+```
+
+TO USE THIS FUNCTION:
+nameof_df_youwant <- summariseStat("name of element", df that contains the element)
+
+```{r : making Nov22_Nov23 stat frames}
+
+#anthropometry
+height_22_23 <- summariseStat("Height..cm.", Nov22_Nov23_minimal_dataset)
+weight_22_23 <- summariseStat("Weight..kg.", Nov22_Nov23_minimal_dataset)
+BMI_22_23 <- summariseStat("BMI", Nov22_Nov23_minimal_dataset)
+BSA_22_23 <- summariseStat("BSA..no.height.available.", Nov22_Nov23_minimal_dataset)
+Sys.BP_22_23 <- summariseStat("Systolic.Blood.Pressure", Nov22_Nov23_minimal_dataset)
+Dias.BP_22_23 <- summariseStat("Diastolic.Blood.Pressure", Nov22_Nov23_minimal_dataset)
+Age_22_23 <- summariseStat("Age", Nov22_Nov23_minimal_dataset)
+
+# medication
+
+```
+
+
+```{r: trying to use function in pipe, for 'per centre' stats}
+# test <- Nov22_Nov23_minimal_dataset %>%
+#   group_by(Centre.ID.x) %>%
+#   lapply(. %>% summariseStat("BMI"))
+
+```
+
+```{r : joining stat frames}
+# StatFrame <- cbind(X, Y)
+```
+
+
+
+############################
