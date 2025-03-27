@@ -79,8 +79,7 @@ Nov23_Feb25_minimal_dataset[Nov23_Feb25_minimal_dataset <=0] <- NA
 ```
 
 
-
-```{r : 17 ohp lab values women vs men per centre}
+```{r : 17 ohp lab values women vs men per centre, include=FALSE}
 OHP_22_23_sex_centre <- Nov22_Nov23_minimal_dataset %>%
   group_by(Centre.ID.x, Sex.at.birth.x) %>%
   summarise("n" = length(X17.OHP.value[!is.na(X17.OHP.value)]),
@@ -122,70 +121,51 @@ andro_23_25_sex_centre <- Nov23_Feb25_minimal_dataset %>%
             "min andro value" = min(Androstenedione.value, na.rm = T),
             "max andro value" = max(Androstenedione.value, na.rm = T)) %>%
   mutate_if(is.numeric, ~round(.,2))
-
-
 ```
 
+```{r : testosterone lab values women vs men per centre, include=FALSE}
+testosterone_22_23_sex_centre <- Nov22_Nov23_minimal_dataset %>%
+  group_by(Centre.ID.x, Sex.at.birth.x) %>%
+  summarise("n" = length(Total.testosterone.value[!is.na(Total.testosterone.value)]),
+            "mean testosterone value" = mean(Total.testosterone.value, na.rm = T),
+            "median testosterone value" = median(Total.testosterone.value, na.rm = T),
+            "sd testosterone value" = sd(Total.testosterone.value, na.rm = T),
+            "min testosterone value" = min(Total.testosterone.value, na.rm = T),
+            "max testosterone value" = max(Total.testosterone.value, na.rm = T)) %>%
+  mutate_if(is.numeric, ~round(.,2))
 
-
---- Statistical analysis ---
-I'm doing this one time frame at a time :)
-
-Let's start with stats for Nov22-Nov23
-
-
-############################
-```{r}
-
-summariseStat <- function(statName, minimalDataset) {
-
-colNames <- names(minimalDataset)
-nameIdx <- colNames == statName
-
-if (sum(nameIdx) == 0) {
-  print(sum(nameIdx))
-  print("no variable with that name")
-  return (FALSE)
-}
-
-stat = as.vector(minimalDataset[,nameIdx])
-
-StatSummary <- minimalDataset %>%
-  summarise("mean" = mean(stat, na.rm = T),
-            "median" = median(stat, na.rm = T),
-            "SD" = sd(stat, na.rm = T),
-            "min" = min(stat, na.rm = T),
-            "max" = max(stat, na.rm = T),
-            "n" = length(stat[!is.na(stat)])) %>%
-  mutate_if(is.numeric, ~round(., 2))
-
-print(StatSummary)
-
-## change shape of data frame
-statSummaryFrame <- data.frame(cbind(names(StatSummary), t(StatSummary)))
-statSummaryFrame <- select(statSummaryFrame, -X1)
-colnames(statSummaryFrame) <- c(statName)
-
-return (statSummaryFrame)
-
-}
+testosterone_23_25_sex_centre <- Nov23_Feb25_minimal_dataset %>%
+  group_by(Centre.ID.x, Sex.at.birth.x) %>%
+  summarise("n" = length(Total.testosterone.value[!is.na(Total.testosterone.value)]),
+            "mean testosterone value" = mean(Total.testosterone.value, na.rm = T),
+            "median testosterone value" = median(Total.testosterone.value, na.rm = T),
+            "sd testosterone value" = sd(Total.testosterone.value, na.rm = T),
+            "min testosterone value" = min(Total.testosterone.value, na.rm = T),
+            "max testosterone value" = max(Total.testosterone.value, na.rm = T)) %>%
+  mutate_if(is.numeric, ~round(.,2))
 ```
 
+```{r : renin plasma activity women vs men per centre, include=FALSE}
+renin_plas_act_22_23_sex_centre <- Nov22_Nov23_minimal_dataset %>%
+  group_by(Centre.ID.x, Sex.at.birth.x) %>%
+  summarise("n" = length(Renin.plasma.activity[!is.na(Renin.plasma.activity)]),
+            "mean testosterone value" = mean(Renin.plasma.activity, na.rm = T),
+            "median testosterone value" = median(Renin.plasma.activity, na.rm = T),
+            "sd testosterone value" = sd(Renin.plasma.activity, na.rm = T),
+            "min testosterone value" = min(Renin.plasma.activity, na.rm = T),
+            "max testosterone value" = max(Renin.plasma.activity, na.rm = T)) %>%
+  mutate_if(is.numeric, ~round(.,2))
 
-
-
-
-how to use Oscar's function
-
-BMI <- summariseStat("BMI", df)
-
-
-```{r : joining stat frames}
-# StatFrame <- cbind(X, Y)
+renin_plas_act_23_25_sex_centre <- Nov23_Feb25_minimal_dataset %>%
+  group_by(Centre.ID.x, Sex.at.birth.x) %>%
+  summarise("n" = length(Renin.plasma.activity[!is.na(Renin.plasma.activity)]),
+            "mean testosterone value" = mean(Renin.plasma.activity, na.rm = T),
+            "median testosterone value" = median(Renin.plasma.activity, na.rm = T),
+            "sd testosterone value" = sd(Renin.plasma.activity, na.rm = T),
+            "min testosterone value" = min(Renin.plasma.activity, na.rm = T),
+            "max testosterone value" = max(Renin.plasma.activity, na.rm = T)) %>%
+  mutate_if(is.numeric, ~round(.,2))
 ```
-
-############################
-
 
 
 

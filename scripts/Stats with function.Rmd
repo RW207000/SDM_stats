@@ -55,8 +55,8 @@ Nov22_Nov23_minimal_dataset$Date.of.Assessment <- as.Date(Nov22_Nov23_minimal_da
 Nov23_Feb25_minimal_dataset$Date.of.Assessment <- as.Date(Nov23_Feb25_minimal_dataset$Date.of.Assessment, format = "%d/%m/%Y")
 ```
 
-Use this function to simplify making stats for numerical data in the minimal data set
 
+Use this function to simplify making stats for numerical data in the minimal data set
 ############################
 ```{r}
 
@@ -93,7 +93,6 @@ return (statSummaryFrame)
 
 }
 ```
-
 
 
 #########
@@ -134,13 +133,6 @@ return (statSummaryFrame)
 
 }
 ```
-
-
-
-
-
-
-
 
 
 ##########
