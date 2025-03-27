@@ -72,11 +72,31 @@ patients_per_centre <- full_join(patients_per_centre_Nov22_Nov23, patients_per_c
 ```
 
 ```{r : removing values of 0 from data frames}
-# I'm doing this because values of 0 indicates data required for previous arithmetic (done in excel) is missing.
+# I'm doing this because values of 0 indicates data required for previous arithmetic (done in excel) is missing. For example, in the total_daily_dose_per_BSA column, if there is a 0, that means that either the total daily dose or BSA is missing.
 
 Nov22_Nov23_minimal_dataset[Nov22_Nov23_minimal_dataset <=0] <- NA
 Nov23_Feb25_minimal_dataset[Nov23_Feb25_minimal_dataset <=0] <- NA
 ```
+
+
+```{r : 17 ohp and andro lab values women vs men per centre}
+OHP_22_23_sex_centre <- Nov22_Nov23_minimal_dataset %>%
+  group_by(Centre.ID.x, Sex.at.birth.x) %>%
+  summarise("mean17OHPvalue" = mean(X17.OHP.value, na.rm = T)) %>%
+  mutate_if(is.numeric, ~round(.,2))
+  
+
+```
+
+
+
+
+
+
+
+
+
+
 
 
 --- Statistical analysis ---
