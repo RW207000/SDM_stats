@@ -94,6 +94,61 @@ return (statSummaryFrame)
 }
 ```
 
+
+
+#########
+```{r}
+summariseStatGroup <- function(statName, minimalDataset) {
+
+colNames <- names(minimalDataset)
+nameIdx <- colNames == statName
+
+if (sum(nameIdx) == 0) {
+  print(sum(nameIdx))
+  print("no variable with that name")
+  return (FALSE)
+}
+
+stat <- as.vector(minimalDataset[,nameIdx])
+
+variableforsummary <- minimalDataset[]
+
+StatSummary <- minimalDataset %>%
+  group_by(Centre.ID.x, Sex.at.birth.x) %>%
+  summarise("mean" = mean(stat, na.rm = T),
+            "median" = median(stat, na.rm = T),
+            "SD" = sd(stat, na.rm = T),
+            "min" = min(stat, na.rm = T),
+            "max" = max(stat, na.rm = T),
+            "n" = length(stat[!is.na(stat)])) %>%
+  mutate_if(is.numeric, ~round(., 2))
+
+print(StatSummary)
+
+## change shape of data frame
+statSummaryFrame <- data.frame(cbind(names(StatSummary), t(StatSummary)))
+statSummaryFrame <- select(statSummaryFrame, -X1)
+colnames(statSummaryFrame) <- c(statName)
+
+return (statSummaryFrame)
+
+}
+```
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+##########
 TO USE THIS FUNCTION:
 nameof_df_youwant <- summariseStat("name of element", df that contains the element)
 
@@ -118,9 +173,14 @@ andro_22_23 <- summariseStat("Androstenedione.value", Nov22_Nov23_minimal_datase
 
 
 ```{r: trying to use function in pipe, for 'per centre' stats}
-# test <- Nov22_Nov23_minimal_dataset %>%
-#   group_by(Centre.ID.x) %>%
-#   lapply(. %>% summariseStat("BMI"))
+test <- Nov22_Nov23_minimal_dataset %>%
+  group_by(Centre.ID.x) %>%
+  summarise(n = n())
+
+
+
+%>%
+  lapply(. %>% summariseStat("BMI"))
 
 ```
 

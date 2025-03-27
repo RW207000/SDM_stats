@@ -106,22 +106,30 @@ OHP_23_25_sex_centre <- Nov23_Feb25_minimal_dataset %>%
 andro_22_23_sex_centre <- Nov22_Nov23_minimal_dataset %>%
   group_by(Centre.ID.x, Sex.at.birth.x) %>%
   summarise("n" = length(Androstenedione.value[!is.na(Androstenedione.value)]),
-            "mean 17OHP value" = mean(Androstenedione.value, na.rm = T),
-            "median 17OHP value" = median(Androstenedione.value, na.rm = T),
-            "sd 17OHP value" = sd(Androstenedione.value, na.rm = T),
-            "min 17OHP value" = min(Androstenedione.value, na.rm = T),
-            "max 17OHP value" = max(Androstenedione.value, na.rm = T)) %>%
+            "mean andro value" = mean(Androstenedione.value, na.rm = T),
+            "median andro value" = median(Androstenedione.value, na.rm = T),
+            "sd andro value" = sd(Androstenedione.value, na.rm = T),
+            "min andro value" = min(Androstenedione.value, na.rm = T),
+            "max andro value" = max(Androstenedione.value, na.rm = T)) %>%
   mutate_if(is.numeric, ~round(.,2))
 
 andro_23_25_sex_centre <- Nov23_Feb25_minimal_dataset %>%
   group_by(Centre.ID.x, Sex.at.birth.x) %>%
   summarise("n" = length(Androstenedione.value[!is.na(Androstenedione.value)]),
-            "mean 17OHP value" = mean(Androstenedione.value, na.rm = T),
-            "median 17OHP value" = median(Androstenedione.value, na.rm = T),
-            "sd 17OHP value" = sd(Androstenedione.value, na.rm = T),
-            "min 17OHP value" = min(Androstenedione.value, na.rm = T),
-            "max 17OHP value" = max(Androstenedione.value, na.rm = T)) %>%
+            "mean andro value" = mean(Androstenedione.value, na.rm = T),
+            "median andro value" = median(Androstenedione.value, na.rm = T),
+            "sd andro value" = sd(Androstenedione.value, na.rm = T),
+            "min andro value" = min(Androstenedione.value, na.rm = T),
+            "max andro value" = max(Androstenedione.value, na.rm = T)) %>%
   mutate_if(is.numeric, ~round(.,2))
+
+######
+
+andro_23_25_sex_centretest <- Nov23_Feb25_minimal_dataset %>%
+  group_by(Centre.ID.x, Sex.at.birth.x) %>%
+  lapply(StatSummary)%>%
+  mutate_if(is.numeric, ~round(.,2))
+
 ```
 
 
