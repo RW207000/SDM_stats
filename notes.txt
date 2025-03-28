@@ -6,7 +6,8 @@ Want to achieve:
 - performs stats on all other numerical fields from minimal dataset (e.g.: height, weight, BMI, renin, testosterone, glucose, BPs)
 - look at dose timings, per centre per drug
 - ** 17 ohp and andro lab values women vs men per centre
-- HC dose trends per centre (including individual doses and total daily doses)
+- *** HC dose trends per centre (including individual doses and 
+		FOR "total daily doses", will need to factor in patients on single or combined therapies)
 - blood pressure - spread of values for both diastolic vs systolic and subsequent categories
 
 
