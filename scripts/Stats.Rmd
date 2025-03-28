@@ -254,6 +254,31 @@ dose_stats_23_25[dose_stats_23_25 == "NaN"] <- NA
 
 ```
 
+```{r : how many patients on each medication for each dose, per centre}
+first_dose_medicine <- Nov23_Feb25_minimal_dataset %>%
+  group_by(Centre.ID.x, Medicine_1.x) %>%
+  summarise("first dose" = n())
+
+second_dose_medicine <- Nov23_Feb25_minimal_dataset %>%
+  group_by(Centre.ID.x, Medicine_2.x) %>%
+  summarise("second dose" = n())
+
+third_dose_medicine <- Nov23_Feb25_minimal_dataset %>%
+  group_by(Centre.ID.x, Medicine_3.x) %>%
+  summarise("third dose" = n())
+
+fourth_dose_medicine <- Nov23_Feb25_minimal_dataset %>%
+  group_by(Centre.ID.x, Medicine_4.x) %>%
+  summarise("fourth dose" = n())
+
+test <- cbind(first_dose_medicine, second_dose_medicine$`second dose`)
+
+### want to add in third and fourth dose counts to test frame
+
+```
+
+
+
 ```{r : end of script section}
 print("Script complete")
 ```
