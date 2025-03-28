@@ -174,7 +174,7 @@ renin_plas_act_23_25_sex_centre <- Nov23_Feb25_minimal_dataset %>%
 
 
 Medication stats
-```{r : individual dose stats, per medication, per centre}
+```{r : individual dose stats, per medication, per centre, include=FALSE}
 dose_stats_22_23 <- Nov22_Nov23_minimal_dataset %>%
   group_by(Centre.ID.x, Medicine_1.x) %>%
   summarise("n Medicine_1.x" = length(Medicine_1.x[!is.na(Medicine_1.x)]),
@@ -251,6 +251,30 @@ dose_stats_23_25 <- Nov23_Feb25_minimal_dataset %>%
 dose_stats_23_25[dose_stats_23_25 == "Inf"] <- NA
 dose_stats_23_25[dose_stats_23_25 == "-Inf"] <- NA
 dose_stats_23_25[dose_stats_23_25 == "NaN"] <- NA
+
+```
+
+```{r : total daily dose trends per medication, per centre, include=FALSE}
+# will need to factor in whether patients are on single or combined therapies...
+# or do I? If doses are standardised then is this relevant?
+
+# let's make a new frame to determine which patients are on single or combined therapies:
+
+therapy <- select(Nov23_Feb25_minimal_dataset, c("Centre.ID.x", "CO.ID.x", "Medicine_1.x", "Medicine_2.x", "Medicine_3.x", "Medicine_4.x"))
+
+therapy$"single/combined" <- NA
+
+therapy$`single/combined` <-
+  ifelse(therapy$Medicine_1.x == therapy$Medicine_2.x &
+         therapy$Medicine_2.x == therapy$Medicine_3.x &
+          therapy$Medicine_3.x == therapy$Medicine_4.x,
+          as.character("single"),
+          as.character("combined"))
+
+# need to work out how to ignore NA cells because ^ counts that as a value...
+
+total_doses <- Nov22_Nov23_minimal_dataset %>%
+  group_by(Centre.ID.x, )
 
 ```
 
