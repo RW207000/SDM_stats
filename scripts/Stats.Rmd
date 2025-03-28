@@ -168,6 +168,48 @@ renin_plas_act_23_25_sex_centre <- Nov23_Feb25_minimal_dataset %>%
 ```
 
 
+Medication stats
+```{r}
+med_test_22_23 <- Nov22_Nov23_minimal_dataset %>%
+  group_by(Centre.ID.x, Medicine_1.x) %>%
+  summarise("n Medicine_1.x" = length(Medicine_1.x[!is.na(Medicine_1.x)]),
+            "mean Medicine_1.x value" = mean(Standardised.doses_1, na.rm = T),
+            "median Medicine_1.x value" = median(Standardised.doses_1, na.rm = T),
+            "sd Medicine_1.x value" = sd(Standardised.doses_1, na.rm = T),
+            "min Medicine_1.x value" = min(Standardised.doses_1, na.rm = T),
+            "max Medicine_1.x value" = max(Standardised.doses_1, na.rm = T),
+            
+            "n Medicine_2.x" = length(Medicine_2.x[!is.na(Medicine_2.x)]),
+            "mean Medicine_2.x value" = mean(Standardised.doses_2, na.rm = T),
+            "median Medicine_2.x value" = median(Standardised.doses_2, na.rm = T),
+            "sd Medicine_2.x value" = sd(Standardised.doses_2, na.rm = T),
+            "min Medicine_2.x value" = min(Standardised.doses_2, na.rm = T),
+            "max Medicine_2.x value" = max(Standardised.doses_2, na.rm = T),
+            
+            "n Medicine_3.x" = length(Medicine_3.x[!is.na(Medicine_3.x)]),
+            "mean Medicine_3.x value" = mean(Standardised.doses_3, na.rm = T),
+            "median Medicine_3.x value" = median(Standardised.doses_3, na.rm = T),
+            "sd Medicine_3.x value" = sd(Standardised.doses_3, na.rm = T),
+            "min Medicine_3.x value" = min(Standardised.doses_3, na.rm = T),
+            "max Medicine_3.x value" = max(Standardised.doses_3, na.rm = T),
+            
+            "n Medicine_4.x" = length(Medicine_4.x[!is.na(Medicine_4.x)]),
+            "mean Medicine_4.x value" = mean(Standardised.doses_4, na.rm = T),
+            "median Medicine_4.x value" = median(Standardised.doses_4, na.rm = T),
+            "sd Medicine_4.x value" = sd(Standardised.doses_4, na.rm = T),
+            "min Medicine_4.x value" = min(Standardised.doses_4, na.rm = T),
+            "max Medicine_4.x value" = max(Standardised.doses_4, na.rm = T),
+            
+            ) %>%
+  mutate_if(is.numeric, ~round(.,2))
+
+
+
+```
+
+```{r : end of script section}
+print("Script complete")
+```
 
 
 
