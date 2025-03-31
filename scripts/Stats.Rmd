@@ -149,28 +149,71 @@ testosterone_23_25_sex_centre <- Nov23_Feb25_minimal_dataset %>%
 renin_plas_act_22_23_sex_centre <- Nov22_Nov23_minimal_dataset %>%
   group_by(Centre.ID.x, Sex.at.birth.x) %>%
   summarise("n" = length(Renin.plasma.activity[!is.na(Renin.plasma.activity)]),
-            "mean testosterone value" = mean(Renin.plasma.activity, na.rm = T),
-            "median testosterone value" = median(Renin.plasma.activity, na.rm = T),
-            "sd testosterone value" = sd(Renin.plasma.activity, na.rm = T),
-            "min testosterone value" = min(Renin.plasma.activity, na.rm = T),
-            "max testosterone value" = max(Renin.plasma.activity, na.rm = T)) %>%
+            "mean renin value" = mean(Renin.plasma.activity, na.rm = T),
+            "median renin value" = median(Renin.plasma.activity, na.rm = T),
+            "sd renin value" = sd(Renin.plasma.activity, na.rm = T),
+            "min renin value" = min(Renin.plasma.activity, na.rm = T),
+            "max renin value" = max(Renin.plasma.activity, na.rm = T)) %>%
   mutate_if(is.numeric, ~round(.,2))
 
 renin_plas_act_23_25_sex_centre <- Nov23_Feb25_minimal_dataset %>%
   group_by(Centre.ID.x, Sex.at.birth.x) %>%
   summarise("n" = length(Renin.plasma.activity[!is.na(Renin.plasma.activity)]),
-            "mean testosterone value" = mean(Renin.plasma.activity, na.rm = T),
-            "median testosterone value" = median(Renin.plasma.activity, na.rm = T),
-            "sd testosterone value" = sd(Renin.plasma.activity, na.rm = T),
-            "min testosterone value" = min(Renin.plasma.activity, na.rm = T),
-            "max testosterone value" = max(Renin.plasma.activity, na.rm = T)) %>%
+            "mean renin value" = mean(Renin.plasma.activity, na.rm = T),
+            "median renin value" = median(Renin.plasma.activity, na.rm = T),
+            "sd renin value" = sd(Renin.plasma.activity, na.rm = T),
+            "min renin value" = min(Renin.plasma.activity, na.rm = T),
+            "max renin value" = max(Renin.plasma.activity, na.rm = T)) %>%
   mutate_if(is.numeric, ~round(.,2))
 ```
 
-```{r : }
+```{r : height per centre per sex, include=FALSE}
+height_22_23_sex_centre <- Nov22_Nov23_minimal_dataset %>%
+  group_by(Centre.ID.x, Sex.at.birth.x) %>%
+  summarise("n" = length(Height..cm.[!is.na(Height..cm.)]),
+            "mean height value" = mean(Height..cm., na.rm = T),
+            "median height value" = median(Height..cm., na.rm = T),
+            "sd height value" = sd(Height..cm., na.rm = T),
+            "min height value" = min(Height..cm., na.rm = T),
+            "max height value" = max(Height..cm., na.rm = T)) %>%
+  mutate_if(is.numeric, ~round(.,2))
 
-
+height_23_25_sex_centre <- Nov23_Feb25_minimal_dataset %>%
+  group_by(Centre.ID.x, Sex.at.birth.x) %>%
+  summarise("n" = length(Height..cm.[!is.na(Height..cm.)]),
+            "mean height value" = mean(Height..cm., na.rm = T),
+            "median height value" = median(Height..cm., na.rm = T),
+            "sd height value" = sd(Height..cm., na.rm = T),
+            "min height value" = min(Height..cm., na.rm = T),
+            "max height value" = max(Height..cm., na.rm = T)) %>%
+  mutate_if(is.numeric, ~round(.,2))
 ```
+
+```{r : weight per centre per sex, include=FALSE}
+weight_22_23_sex_centre <- Nov22_Nov23_minimal_dataset %>%
+  group_by(Centre.ID.x, Sex.at.birth.x) %>%
+  summarise("n" = length(Weight..kg.[!is.na(Weight..kg.)]),
+            "mean weight value" = mean(Weight..kg., na.rm = T),
+            "median weight value" = median(Weight..kg., na.rm = T),
+            "sd weight value" = sd(Weight..kg., na.rm = T),
+            "min weight value" = min(Weight..kg., na.rm = T),
+            "max weight value" = max(Weight..kg., na.rm = T)) %>%
+  mutate_if(is.numeric, ~round(.,2))
+
+weight_23_25_sex_centre <- Nov23_Feb25_minimal_dataset %>%
+  group_by(Centre.ID.x, Sex.at.birth.x) %>%
+  summarise("n" = length(Weight..kg.[!is.na(Weight..kg.)]),
+            "mean weight value" = mean(Weight..kg., na.rm = T),
+            "median weight value" = median(Weight..kg., na.rm = T),
+            "sd weight value" = sd(Weight..kg., na.rm = T),
+            "min weight value" = min(Weight..kg., na.rm = T),
+            "max weight value" = max(Weight..kg., na.rm = T)) %>%
+  mutate_if(is.numeric, ~round(.,2))
+```
+
+
+
+
 
 
 Medication stats
@@ -271,10 +314,22 @@ therapy$`single/combined` <-
           as.character("single"),
           as.character("combined"))
 
-# need to work out how to ignore NA cells because ^ counts that as a value...
+# need to work out how to ignore NA cells because ^ counts them as a value...
+```
 
-total_doses <- Nov22_Nov23_minimal_dataset %>%
-  group_by(Centre.ID.x, )
+```{r : total daily dose per  centre}
+total_doses_22_23 <- Nov22_Nov23_minimal_dataset %>%
+  group_by(Centre.ID.x) %>%
+  summarise(mean_total_dose = mean(total_standardised_daily_dose_1_1, na.rm = T),) %>%
+  mutate_if(is.numeric, ~round(.,2))
+
+total_doses_23_25 <- Nov23_Feb25_minimal_dataset %>%
+  group_by(Centre.ID.x) %>%
+  summarise(mean_total_dose = mean(total_standardised_daily_dose_1_1, na.rm = T),
+            n = n()) %>%
+  mutate_if(is.numeric, ~round(.,2))
+
+
 
 ```
 
@@ -300,7 +355,6 @@ test <- cbind(first_dose_medicine, second_dose_medicine$`second dose`)
 ### want to add in third and fourth dose counts to test frame
 
 ```
-
 
 
 ```{r : end of script section}
