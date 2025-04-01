@@ -211,7 +211,61 @@ weight_23_25_sex_centre <- Nov23_Feb25_minimal_dataset %>%
   mutate_if(is.numeric, ~round(.,2))
 ```
 
+```{r : BMI per centre per sex, include = FALSE}
+BMI_22_23_data <- select(Nov22_Nov23_minimal_dataset, c("Centre.ID.x", "Sex.at.birth.x", "BMI"))
+BMI_22_23_data$Category <- ""
+BMI_22_23_data$Category [BMI_22_23_data$BMI <18.5] <- "Underweight"
+BMI_22_23_data$Category [BMI_22_23_data$BMI >= 18.5 & BMI_22_23_data$BMI <25] <- "Normal"
+BMI_22_23_data$Category [BMI_22_23_data$BMI >= 25 & BMI_22_23_data$BMI <30] <- "Overweight"
+BMI_22_23_data$Category [BMI_22_23_data$BMI >=30 & BMI_22_23_data$BMI <35] <- "Obese"
+BMI_22_23_data$Category [BMI_22_23_data$BMI >=35] <- "Extremely obese"
+BMI_22_23_data$Category [BMI_22_23_data$Category == ""] <- "Missing"
 
+BMI_22_23_sex_centre <- BMI_22_23_data %>%
+  group_by(Centre.ID.x, Sex.at.birth.x) %>%
+  summarise("n" = length(BMI[!is.na(BMI)]),
+            "mean BMI value" = mean(BMI, na.rm = T),
+            "median BMI value" = median(BMI, na.rm = T),
+            "sd BMI value" = sd(BMI, na.rm = T),
+            "min BMI value" = min(BMI, na.rm = T),
+            "max BMI value" = max(BMI, na.rm = T)) %>%
+  mutate_if(is.numeric, ~round(.,2))
+
+BMI_categories_22_23_sex_centre <- BMI_22_23_data %>%
+  group_by(Centre.ID.x, Sex.at.birth.x, Category) %>%
+  summarise(n = n()) %>%
+  pivot_wider(names_from = "Category",
+              values_from = "n")
+
+
+#
+BMI_23_25_data <- select(Nov23_Feb25_minimal_dataset, c("Centre.ID.x", "Sex.at.birth.x", "BMI"))
+BMI_23_25_data$Category <- ""
+BMI_23_25_data$Category [BMI_23_25_data$BMI <18.5] <- "Underweight"
+BMI_23_25_data$Category [BMI_23_25_data$BMI >= 18.5 & BMI_23_25_data$BMI <25] <- "Normal"
+BMI_23_25_data$Category [BMI_23_25_data$BMI >= 25 & BMI_23_25_data$BMI <30] <- "Overweight"
+BMI_23_25_data$Category [BMI_23_25_data$BMI >=30 & BMI_23_25_data$BMI <35] <- "Obese"
+BMI_23_25_data$Category [BMI_23_25_data$BMI >=35] <- "Extremely obese"
+BMI_23_25_data$Category [BMI_23_25_data$Category == ""] <- "Missing"
+
+BMI_23_25_sex_centre <- BMI_23_25_data %>%
+  group_by(Centre.ID.x, Sex.at.birth.x) %>%
+  summarise("n" = length(BMI[!is.na(BMI)]),
+            "mean BMI value" = mean(BMI, na.rm = T),
+            "median BMI value" = median(BMI, na.rm = T),
+            "sd BMI value" = sd(BMI, na.rm = T),
+            "min BMI value" = min(BMI, na.rm = T),
+            "max BMI value" = max(BMI, na.rm = T)) %>%
+  mutate_if(is.numeric, ~round(.,2))
+
+BMI_categories_23_25_sex_centre <- BMI_23_25_data %>%
+  group_by(Centre.ID.x, Sex.at.birth.x, Category) %>%
+  summarise(n = n()) %>%
+  pivot_wider(names_from = "Category",
+              values_from = "n")
+
+
+```
 
 
 
