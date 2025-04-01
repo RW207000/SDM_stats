@@ -79,9 +79,10 @@ Nov23_Feb25_minimal_dataset[Nov23_Feb25_minimal_dataset <=0] <- NA
 ```
 
 
-```{r : 17 ohp lab values women vs men per centre, include=FALSE}
+```{r : 17 ohp lab values per centre, include=FALSE}
+# doesn't need to be separated into females and males
 OHP_22_23_sex_centre <- Nov22_Nov23_minimal_dataset %>%
-  group_by(Centre.ID.x, Sex.at.birth.x) %>%
+  group_by(Centre.ID.x) %>%
   summarise("n" = length(X17.OHP.value[!is.na(X17.OHP.value)]),
             "mean 17OHP value" = mean(X17.OHP.value, na.rm = T),
             "median 17OHP value" = median(X17.OHP.value, na.rm = T),
@@ -91,7 +92,7 @@ OHP_22_23_sex_centre <- Nov22_Nov23_minimal_dataset %>%
   mutate_if(is.numeric, ~round(.,2))
 
 OHP_23_25_sex_centre <- Nov23_Feb25_minimal_dataset %>%
-  group_by(Centre.ID.x, Sex.at.birth.x) %>%
+  group_by(Centre.ID.x) %>%
   summarise("n" = length(X17.OHP.value[!is.na(X17.OHP.value)]),
             "mean 17OHP value" = mean(X17.OHP.value, na.rm = T),
             "median 17OHP value" = median(X17.OHP.value, na.rm = T),
@@ -263,7 +264,6 @@ BMI_categories_23_25_sex_centre <- BMI_23_25_data %>%
   summarise(n = n()) %>%
   pivot_wider(names_from = "Category",
               values_from = "n")
-
 
 ```
 
