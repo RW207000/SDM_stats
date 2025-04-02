@@ -7,6 +7,9 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
+# colours
+myColours <- c("purple", "lightblue", "grey")
 ```
 
 NOTE:
@@ -22,9 +25,6 @@ raw_weight_22_23$Centre.ID.x <- as.factor(raw_weight_22_23$Centre.ID.x)
 
 # remove rows with NA for weight
 raw_weight_22_23 <- raw_weight_22_23 [!is.na(raw_weight_22_23$Weight..kg.),]
-
-# colours
-myColours <- c("purple", "lightblue", "grey")
 
 # basic box plot
 graph_weight_22_23 <- ggplot(data = raw_weight_22_23, aes(x = Centre.ID.x, y = Weight..kg., fill = Sex.at.birth.x)) +
@@ -229,6 +229,9 @@ graph_andro_23_25 <- ggplot(data = raw_andro_23_25, aes(x = Centre.ID.x, y = And
 
 # view
 graph_andro_23_25
+
+# attempt to add in axes break
+
 ```
 
 ```{r : testosterone box plot}
