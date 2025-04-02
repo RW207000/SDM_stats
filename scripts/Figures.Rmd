@@ -16,12 +16,7 @@ Let's practice with height data
 Make new data frame with raw height data in
 
 ```{r}
-myColours <- ifelse(levels(raw_weight_22_23$Sex.at.birth.x) == "Female", rgb(0.1,0.1,0.7,0.5),
-              ifelse(levels(raw_weight_22_23$Sex.at.birth.x) == "Male",
-rgb(0.8,0.1,0.3,0.6),
-"grey90"))
-
-
+# make new data frame
 raw_weight_22_23 <- select(Nov22_Nov23_minimal_dataset, c("Centre.ID.x", "Sex.at.birth.x", "Weight..kg."))
 
 # change Centre ID to factor variable (to be able to use it as x axis)
@@ -30,16 +25,21 @@ raw_weight_22_23$Centre.ID.x <- as.factor(raw_weight_22_23$Centre.ID.x)
 # remove rows with NA for weight
 raw_weight_22_23 <- raw_weight_22_23 [!is.na(raw_weight_22_23$Weight..kg.),]
 
+# colours
+myColours <- c("purple", "lightblue", "grey")
+
 # basic box plot
-ggplot(data = raw_weight_22_23, aes(x = Centre.ID.x, y = Weight..kg., fill = Sex.at.birth.x)) +
+graph_weight_22_23 <- ggplot(data = raw_weight_22_23, aes(x = Centre.ID.x, y = Weight..kg., fill = Sex.at.birth.x)) +
   geom_boxplot() +
   labs(title = "Weight distribution 22-23", x = "Centre ID", y = "Weight (kg)") +
-  theme_minimal()
+  theme_minimal() +
+  scale_fill_manual(values = myColours)
+
+# view
+graph_weight_22_23
 
 
-
-
-
+## for other time frame
 
 # make new height data frame
 raw_weight_23_25 <- select(Nov23_Feb25_minimal_dataset, c("Centre.ID.x", "Sex.at.birth.x", "Weight..kg."))
@@ -51,20 +51,23 @@ raw_weight_23_25$Centre.ID.x <- as.factor(raw_weight_23_25$Centre.ID.x)
 raw_weight_23_25 <- raw_weight_23_25 [!is.na(raw_weight_23_25$Weight..kg.),]
 
 # basic box plot
-ggplot(data = raw_weight_23_25, aes(x = Centre.ID.x, y = Weight..kg., fill = Sex.at.birth.x)) +
+graph_weight_23_25 <- ggplot(data = raw_weight_23_25, aes(x = Centre.ID.x, y = Weight..kg., fill = Sex.at.birth.x)) +
   geom_boxplot() +
   labs(title = "Weight distribution 23-25", x = "Centre ID", y = "Weight (kg)") +
-  theme_minimal()
+  theme_minimal() +
+  scale_fill_manual(values = myColours)
+
+# view
+graph_weight_23_25
 ```
 
 
 ```{r : basic box plot}
-# prepare the data
+
+```
 
 
-Nov23_Feb25_minimal_dataset %>%
-  ggplot(aes(x = Centre.ID.x, y = Height..cm., fill = Centre.ID.x)) +
-  geom_boxplot()
-  
-  
+
+```{r : end of script section}
+print("Script complete")
 ```
