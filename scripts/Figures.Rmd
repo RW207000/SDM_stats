@@ -313,7 +313,7 @@ graph_testo_22_23 <- ggplot(data = raw_testo_22_23, aes(x = Centre.ID.x, y = Tot
   labs(title = "Testosterone distribution 22-23", x = "Centre ID", y = "Testosterone value (nmol/L)") +
   theme_minimal() +
   scale_fill_manual(values = myColours) +
-  facet_wrap(~ Sex.at.birth.x, scales = "free")
+  facet_wrap(~ Sex.at.birth.x)
 
 # view
 graph_testo_22_23
@@ -335,7 +335,7 @@ graph_testo_23_25 <- ggplot(data = raw_testo_23_25, aes(x = Centre.ID.x, y = Tot
   labs(title = "Testosterone distribution 23-25", x = "Centre ID", y = "Testosterone value (nmol/L)") +
   theme_minimal() +
   scale_fill_manual(values = myColours) +
-  facet_wrap(~ Sex.at.birth.x, scales = "free")
+  facet_wrap(~ Sex.at.birth.x)
 
 # view
 graph_testo_23_25
@@ -358,7 +358,8 @@ graph_renin_22_23 <- ggplot(data = raw_renin_22_23, aes(x = Centre.ID.x, y = Ren
   geom_boxplot() +
   labs(title = "Renin plasma activity distribution 22-23", x = "Centre ID", y = "Renin plasma activity value (uIU/ml)") +
   theme_minimal() +
-  scale_fill_manual(values = myColours)
+  scale_fill_manual(values = myColours) +
+  facet_wrap(~ Sex.at.birth.x)
 
 # view
 graph_renin_22_23
@@ -380,7 +381,8 @@ graph_renin_23_25 <- ggplot(data = raw_renin_23_25, aes(x = Centre.ID.x, y = Ren
   geom_boxplot() +
   labs(title = "Renin plasma activity distribution 23-25", x = "Centre ID", y = "Renin plasma activity value (uIU/ml)") +
   theme_minimal() +
-  scale_fill_manual(values = myColours)
+  scale_fill_manual(values = myColours) +
+  facet_wrap(~ Sex.at.birth.x)
 
 # view
 graph_renin_23_25
