@@ -9,5 +9,9 @@ outputs/
 #ignore .RData
 .RData
 
+#ignore notes.txt
+notes.txt
+
+
 #ignore .Rhistory
 .Rhistory
