@@ -16,10 +16,13 @@ Nov23_Nov24_minimal_dataset <- read.csv("C:/Users/md1rwe/Documents/Data extracti
 Nov24_Feb25_minimal_dataset <- read.csv("C:/Users/md1rwe/Documents/Data extractions from I-CAH/Feb 2025/SDM_stats/data/Feb25-Nov24.csv", header=T, na.strings= c("", "NA"))
 
 # making Nov23-Feb25
-Nov23_Feb25_minimal_dataset <- rbind(Nov23_Nov24_minimal_dataset, Nov24_Feb25_minimal_dataset) 
+Nov23_Feb25_minimal_dataset <- rbind(Nov23_Nov24_minimal_dataset, Nov24_Feb25_minimal_dataset)
 
 # remove the two now individual frames
 remove(Nov23_Nov24_minimal_dataset, Nov24_Feb25_minimal_dataset)
+
+# given that stats here will often be split by sex, NK says to remove the single 'Not Assigned' (add note of this patient's data) to make plots easier to read. They're in the Nov23-Feb25 dataframe
+Nov23_Feb25_minimal_dataset <- Nov23_Feb25_minimal_dataset [!Nov23_Feb25_minimal_dataset$Sex.at.birth.x == "Not Assigned",]
 
 # colours
 myColours <- c("purple", "lightblue", "grey")
