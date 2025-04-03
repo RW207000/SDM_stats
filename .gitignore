@@ -12,6 +12,5 @@ outputs/
 #ignore notes.txt
 notes.txt
 
-
 #ignore .Rhistory
 .Rhistory
