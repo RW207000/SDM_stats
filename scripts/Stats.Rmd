@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 libraries
 ```{r : reading libraries, include= FALSE}
-packages <- c("tidyverse", "readxl", "dplyr", "magrittr", "mixtools", "emmeans", "readr","data.table", "lubridate", "ggplot2", "skimr", "ggstatsplot","summarytools", "knitr", "here", "ggthemes", "Amelia", "tidyr", "naniar", "stringr", "janitor", "ggbreak", "patchwork")
+packages <- c("tidyverse", "readxl", "dplyr", "magrittr", "mixtools", "emmeans", "readr","data.table", "lubridate", "ggplot2", "skimr", "ggstatsplot","summarytools", "knitr", "here", "ggthemes", "Amelia", "tidyr", "naniar", "stringr", "janitor", "ggbreak", "patchwork", "plotrix", "viridis", "hrbrthemes")
 
 lapply(packages, library, character.only = TRUE)
 ```
@@ -361,12 +361,30 @@ therapy <- select(Nov23_Feb25_minimal_dataset, c("Centre.ID.x", "CO.ID.x", "Medi
 
 therapy$"single/combined" <- NA
 
-therapy$`single/combined` <-
-  ifelse(therapy$Medicine_1.x == therapy$Medicine_2.x &
-         therapy$Medicine_2.x == therapy$Medicine_3.x &
-          therapy$Medicine_3.x == therapy$Medicine_4.x,
-          as.character("single"),
-          as.character("combined"))
+# therapy$`single/combined` <-
+#   ifelse(therapy$Medicine_1.x == therapy$Medicine_2.x &
+#          therapy$Medicine_2.x == therapy$Medicine_3.x &
+#           therapy$Medicine_3.x == therapy$Medicine_4.x,
+#           as.character("single"),
+#           as.character("combined"))
+
+# check for single
+therapy$single <-
+  ifelse(!is.na(therapy$Medicine_1.x) &
+         (is.na(therapy$Medicine_2.x) & is.na(therapy$Medicine_3.x) & is.na(therapy$Medicine_4.x) |
+          therapy$Medicine_1.x == therapy$Medicine_2.x & is.na(therapy$Medicine_3.x) & is.na(therapy$Medicine_4.x) |
+          therapy$Medicine_1.x == therapy$Medicine_2.x & therapy$Medicine_1.x == therapy$Medicine_3.x & is.na(therapy$Medicine_4.x) |
+          therapy$Medicine_1.x == therapy$Medicine_2.x & therapy$Medicine_1.x == therapy$Medicine_3.x & therapy$Medicine_1.x == therapy$Medicine_4.x),
+          TRUE, FALSE)
+
+#check for combined
+therapy$combined <-
+  ifelse(!is.na(therapy$Medicine_1.x) &
+         therapy$single != TRUE,
+          TRUE, FALSE)
+
+
+
 
 # need to work out how to ignore NA cells because ^ counts them as a value...
 ```
