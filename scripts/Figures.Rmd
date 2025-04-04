@@ -7,7 +7,17 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+```
 
+libraries
+```{r : reading libraries, include= FALSE}
+packages <- c("tidyverse", "readxl", "dplyr", "magrittr", "mixtools", "emmeans", "readr","data.table", "lubridate", "ggplot2", "skimr", "ggstatsplot","summarytools", "knitr", "here", "ggthemes", "Amelia", "tidyr", "naniar", "stringr", "janitor", "ggbreak", "patchwork", "plotrix", "viridis", "hrbrthemes")
+
+lapply(packages, library, character.only = TRUE)
+```
+
+
+```{r : set up #2}
 # read in data
 Nov22_Nov23_minimal_dataset <- read.csv("C:/Users/md1rwe/Documents/Data extractions from I-CAH/Feb 2025/SDM_stats/data/Nov22-Nov23.csv", header=T, na.strings= c("", "NA"))
 
