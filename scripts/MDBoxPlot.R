@@ -1,0 +1,67 @@
+MDBoxPlot <- function (MDS, Param, splitType, ttl) {
+
+  if (splitType == "None") {
+    #select only relevant data
+  paramData <- select(MDS, c("Centre.ID.x", "Sex.at.birth.x", Param))
+  
+  #change centre ID to factor
+  paramData$Centre.ID.x <- as.factor(paramData$Centre.ID.x)
+  
+  #remove NA from param, 3rd column have parameters to plot
+  paramData <- paramData[!is.na(paramData[,3]),]
+  
+  #rename 3rd column to param so we can reference it
+  paramData <- paramData %>% rename(param = 3)
+
+  #box plot
+  graph <- ggplot(data = paramData, aes(x = Centre.ID.x, y = param)) +
+    geom_boxplot() +
+    labs(title = ttl, x = "CentreID", y = Param)
+  
+  
+  } else if(splitType == "SBS") {
+    
+    #select only relevant data
+    paramData <- select(MDS, c("Centre.ID.x", "Sex.at.birth.x", Param))
+    
+    #change centre ID to factor
+    paramData$Centre.ID.x <- as.factor(paramData$Centre.ID.x)
+    
+    #remove NA from param, 3rd column have parameters to plot
+    paramData <- paramData[!is.na(paramData[,3]),]
+    
+    #rename 3rd column to param so we can reference it
+    paramData <- paramData %>% rename(param = 3)
+    
+    #box plot
+    graph <- ggplot(data = paramData, aes(x = Centre.ID.x, y = param, fill = Sex.at.birth.x)) +
+      geom_boxplot() +
+      labs(title = ttl, x = "CentreID", y = Param)
+    
+  } else if(splitType == "NTEO") {
+    #select only relevant data
+    paramData <- select(MDS, c("Centre.ID.x", "Sex.at.birth.x", Param))
+    
+    #change centre ID to factor
+    paramData$Centre.ID.x <- as.factor(paramData$Centre.ID.x)
+    
+    #remove NA from param, 3rd column have parameters to plot
+    paramData <- paramData[!is.na(paramData[,3]),]
+    
+    #rename 3rd column to param so we can reference it
+    paramData <- paramData %>% rename(param = 3)
+    
+    #box plot
+    graph <- ggplot(data = paramData, aes(x = Centre.ID.x, y = param, fill = Sex.at.birth.x)) +
+      geom_boxplot() +
+      labs(title = ttl, x = "CentreID", y = Param) + 
+      facet_wrap(~ Sex.at.birth.x)
+  } else {
+    print("Wrong split type, use None, SBS, or NTEO")
+  }
+  
+  
+
+  
+  return(graph)
+}
