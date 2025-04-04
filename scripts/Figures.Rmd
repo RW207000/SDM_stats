@@ -152,6 +152,52 @@ graph_height_23_25 <- ggplot(data = raw_height_23_25, aes(x = Centre.ID.x, y = H
 graph_height_23_25
 ```
 
+```{r : age histogram plot}
+# decided to do histogram because I'm looking at the distribution of ages rather than the stats
+
+# make new data frame
+raw_age_22_23 <- select(Nov22_Nov23_minimal_dataset, c("Centre.ID.x", "Sex.at.birth.x", "Age"))
+
+# change Centre ID to factor variable (to be able to use it as x axis)
+raw_age_22_23$Centre.ID.x <- as.factor(raw_age_22_23$Centre.ID.x)
+
+# remove rows with NA for height
+raw_age_22_23 <- raw_age_22_23 [!is.na(raw_age_22_23$Age),]
+
+# histogram
+graph_age_22_23 <- ggplot(raw_age_22_23, aes(x = Age, fill = Sex.at.birth.x)) +
+  geom_histogram(binwidth = 2) +
+  labs(title = "Age distibution 22-23", x = "Age", y = "Frequency") +
+  theme_minimal() +
+  scale_fill_manual(values = myColours)
+
+# view
+graph_age_22_23
+
+
+## for other time frame
+
+# make new data frame
+raw_age_23_25 <- select(Nov23_Feb25_minimal_dataset, c("Centre.ID.x", "Sex.at.birth.x", "Age"))
+
+# change Centre ID to factor variable (to be able to use it as x axis)
+raw_age_23_25$Centre.ID.x <- as.factor(raw_age_23_25$Centre.ID.x)
+
+# remove rows with NA for height
+raw_age_23_25 <- raw_age_23_25 [!is.na(raw_age_23_25$Age),]
+
+# histogram
+graph_age_23_25 <- ggplot(raw_age_23_25, aes(x = Age, fill = Sex.at.birth.x)) +
+  geom_histogram(binwidth = 2) +
+  labs(title = "Age distibution 23-25", x = "Age", y = "Frequency") +
+  theme_minimal() +
+  scale_fill_manual(values = myColours)
+
+# view
+graph_age_23_25
+```
+
+
 ```{r : BMI box plot}
 # make new data frame
 raw_BMI_22_23 <- select(Nov22_Nov23_minimal_dataset, c("Centre.ID.x", "Sex.at.birth.x", "BMI"))
