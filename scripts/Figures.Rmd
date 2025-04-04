@@ -46,7 +46,17 @@ myColours <- c("purple", "lightblue", "grey")
 # MDBoxPlot <- function (MDS, Param, splitType, ttl)
 #
 
-  TestoPlot22_23 <- MDBoxPlot(Nov22_Nov23_minimal_dataset, "Total.testosterone.value", "None", "Testosterone values")
+  HeightPlot22_23 <- MDBoxPlot(Nov22_Nov23_minimal_dataset, "Height..cm.", "NTEO", "Height 22_23")
+
+  HeightPlot23_25 <- MDBoxPlot(Nov23_Feb25_minimal_dataset, "Height..cm.", "NTEO", "Height 23_25")
+    
+  WightPlot22_23
+
+  TestoPlot22_23 <- MDBoxPlot(Nov22_Nov23_minimal_dataset, "Total.testosterone.value", "NTEO", "Testosterone 22_23")
+
+  TestoPlot23_25 <- MDBoxPlot(Nov23_Feb25_minimal_dataset, "Total.testosterone.value", "NTEO", "Testosterone 23_25")
+  
+  
 
   BMIPlot_22_23 <- MDBoxPlot(Nov22_Nov23_minimal_dataset, "BMI", "None", "BMI_22_23")
 

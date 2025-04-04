@@ -162,6 +162,11 @@ anthropometry_stats_22_23 <- cbind(height_22_23, weight_22_23, Age_22_23, BMI_22
 ```
 
 
+``` {r : medication stats}
+
+
+
+```
 
 
 ```{r : end of script section}
