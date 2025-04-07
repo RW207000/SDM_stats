@@ -46,19 +46,35 @@ myColours <- c("purple", "lightblue", "grey")
 # MDBoxPlot <- function (MDS, Param, splitType, ttl)
 #
 
-  HeightPlot22_23 <- MDBoxPlot(Nov22_Nov23_minimal_dataset, "Height..cm.", "NTEO", "Height 22_23")
+# anthropometry
 
-  HeightPlot23_25 <- MDBoxPlot(Nov23_Feb25_minimal_dataset, "Height..cm.", "NTEO", "Height 23_25")
-    
-  WightPlot22_23
+  HeightPlot22_23 <- MDBoxPlot(Nov22_Nov23_minimal_dataset, "Height..cm.", "SBS", "Height 22_23")
 
+  HeightPlot23_25 <- MDBoxPlot(Nov23_Feb25_minimal_dataset, "Height..cm.", "SBS", "Height 23_25")
+ 
+  WeightPlot22_23 <- MDBoxPlot(Nov22_Nov23_minimal_dataset, "Weight..kg.", "SBS", "Weight 22_23")
+     
+  WeightPlot23_25 <- MDBoxPlot(Nov23_Feb25_minimal_dataset, "Weight..kg.", "SBS", "Weight 23_25")
+  
+  BMIPlot_22_23 <- MDBoxPlot(Nov22_Nov23_minimal_dataset, "BMI", "SBS", "BMI_22_23")
+  
+  BMIPlot_23_25 <- MDBoxPlot(Nov23_Feb25_minimal_dataset, "BMI", "SBS", "BMI_23_25")  
+  
+# biomarkers
+  
   TestoPlot22_23 <- MDBoxPlot(Nov22_Nov23_minimal_dataset, "Total.testosterone.value", "NTEO", "Testosterone 22_23")
 
   TestoPlot23_25 <- MDBoxPlot(Nov23_Feb25_minimal_dataset, "Total.testosterone.value", "NTEO", "Testosterone 23_25")
   
-  
+  ReninPlot22_23 <- MDBoxPlot(Nov22_Nov23_minimal_dataset, "Renin.value", "NTEO", "Renin 22_23")
 
-  BMIPlot_22_23 <- MDBoxPlot(Nov22_Nov23_minimal_dataset, "BMI", "None", "BMI_22_23")
+  ReninPlot23_25 <- MDBoxPlot(Nov23_Feb25_minimal_dataset, "Renin.value", "NTEO", "Renin 23_25")
+  
+  OHPPlot22_23 <- MDBoxPlot(Nov22_Nov23_minimal_dataset, "X17.OHP.value", "NTEO", "17 OHP 22_23")
+  
+  OHPPlot23_25 <- MDBoxPlot(Nov23_Feb25_minimal_dataset, "X17.OHP.value", "NTEO", "17 OHP 23_25")
+  
+  
 
 ```
 
