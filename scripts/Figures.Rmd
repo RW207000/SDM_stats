@@ -73,8 +73,6 @@ myColours <- c("purple", "lightblue", "grey")
   OHPPlot22_23 <- MDBoxPlot(Nov22_Nov23_minimal_dataset, "X17.OHP.value", "NTEO", "17 OHP 22_23")
   
   OHPPlot23_25 <- MDBoxPlot(Nov23_Feb25_minimal_dataset, "X17.OHP.value", "NTEO", "17 OHP 23_25")
-  
-  
 
 ```
 
