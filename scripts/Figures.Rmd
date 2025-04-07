@@ -56,9 +56,9 @@ myColours <- c("purple", "lightblue", "grey")
      
   WeightPlot23_25 <- MDBoxPlot(Nov23_Feb25_minimal_dataset, "Weight..kg.", "SBS", "Weight 23_25")
   
-  BMIPlot_22_23 <- MDBoxPlot(Nov22_Nov23_minimal_dataset, "BMI", "SBS", "BMI_22_23")
+  BMIPlot_22_23 <- MDBoxPlot(Nov22_Nov23_minimal_dataset, "BMI", "SBS", "BMI 22_23")
   
-  BMIPlot_23_25 <- MDBoxPlot(Nov23_Feb25_minimal_dataset, "BMI", "SBS", "BMI_23_25")  
+  BMIPlot_23_25 <- MDBoxPlot(Nov23_Feb25_minimal_dataset, "BMI", "SBS", "BMI 23_25")  
   
 # biomarkers
   
@@ -94,6 +94,9 @@ graph_weight_22_23 <- ggplot(data = raw_weight_22_23, aes(x = Centre.ID.x, y = W
   labs(title = "Weight distribution 22-23", x = "Centre ID", y = "Weight (kg)") +
   theme_minimal() +
   scale_fill_manual(values = myColours)
+
+# +
+#   geom_point(position = position_dodge(width = 0.75), aes(group = Sex.at.birth.x))
 
 # view
 graph_weight_22_23

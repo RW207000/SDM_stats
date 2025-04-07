@@ -16,7 +16,7 @@ MDBoxPlot <- function (MDS, Param, splitType, ttl) {
   #box plot
   graph <- ggplot(data = paramData, aes(x = Centre.ID.x, y = param)) +
     geom_boxplot() +
-    labs(title = ttl, x = "CentreID", y = Param) +
+    labs(title = ttl, x = "Centre ID", y = Param) +
     theme_minimal() +
     scale_fill_manual(values = myColours)
   
@@ -37,9 +37,11 @@ MDBoxPlot <- function (MDS, Param, splitType, ttl) {
     #box plot
     graph <- ggplot(data = paramData, aes(x = Centre.ID.x, y = param, fill = Sex.at.birth.x)) +
       geom_boxplot() +
-      labs(title = ttl, x = "CentreID", y = Param) +
+      labs(title = ttl, x = "Centre ID", y = Param) +
       theme_minimal() +
-      scale_fill_manual(values = myColours)
+      scale_fill_manual(values = myColours) +
+      geom_point(position = position_dodge(width = 0.75),
+                 aes(group = Sex.at.birth.x))
     
   } else if(splitType == "NTEO") {
     #select only relevant data
@@ -57,10 +59,11 @@ MDBoxPlot <- function (MDS, Param, splitType, ttl) {
     #box plot
     graph <- ggplot(data = paramData, aes(x = Centre.ID.x, y = param, fill = Sex.at.birth.x)) +
       geom_boxplot() +
-      labs(title = ttl, x = "CentreID", y = Param) + 
+      labs(title = ttl, x = "Centre ID", y = Param) + 
       theme_minimal() +
       scale_fill_manual(values = myColours) +
-      facet_wrap(~ Sex.at.birth.x)
+      facet_wrap(~ Sex.at.birth.x) +
+      geom_point()
     
   } else {
     print("Wrong split type, use None, SBS, or NTEO")
