@@ -37,6 +37,9 @@ Nov23_Feb25_minimal_dataset <- Nov23_Feb25_minimal_dataset [!Nov23_Feb25_minimal
 
 # colours
 myColours <- c("purple", "lightblue", "grey")
+
+# histogram colours
+histColours <- c("red", "springgreen2", "royalblue2")
 ```
 
 ```{r : split therapy types}
@@ -87,69 +90,122 @@ therapy_23_25$`single/combined` <-
           as.character("single"),
           as.character("combined"))
 
-therapy_22_23_single = therapy_22_23[therapy_22_23$`single/combined` == "single",]
-therapy_23_25_single = therapy_23_25[therapy_23_25$`single/combined` == "single",]
+therapy_22_23_single <- therapy_22_23[therapy_22_23$`single/combined` == "single",]
+therapy_23_25_single <- therapy_23_25[therapy_23_25$`single/combined` == "single",]
 
+therapy_22_23_combined <- therapy_22_23[therapy_22_23$`single/combined` == "combined",] 
+therapy_23_25_combined <- therapy_23_25[therapy_23_25$`single/combined` == "combined",]
 ```
 
-```{r : make plots with raw doses 22-23}
-# for 22-23, raw dose values
-
-HydrocortisoneBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Hydrocortisone",], "Total_raw_dose", "None", "total dose hydro 22-23")
-
-PrednisoloneBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Prednisolone",], "Total_raw_dose", "None", "total dose prednisolone 22-23") + ylim(0, 10)
-
-EfmodyBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Efmody",], "Total_raw_dose", "None", "total dose efmody 22-23")
+```{r : med box plots raw values}
+# using MDBoxPlot function
 
 DexamethasoneBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Dexamethasone",], "Total_raw_dose", "None", "total dose dexamethasone 22-23")
 
-```
+DexamethasoneBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Dexamethasone",], "Total_raw_dose", "None", "total dose dexamethasone 23-25")
 
-```{r : make plots with raw doses 23-25}
-# for 23-25, raw dose values
+EfmodyBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Efmody",], "Total_raw_dose", "None", "total dose efmody 22-23")
+
+EfmodyBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Efmody",], "Total_raw_dose", "None", "total dose efmody 23-25")
+
+HydrocortisoneBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Hydrocortisone",], "Total_raw_dose", "None", "total dose hydro 22-23")
 
 HydrocortisoneBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Hydrocortisone",], "Total_raw_dose", "None", "total dose hydro 23-25")
 
-PrednisoloneBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Prednisolone",], "Total_raw_dose", "None", "total dose") + ylim(0, 10)
+PrednisoloneBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Prednisolone",], "Total_raw_dose", "None", "total dose prednisolone 22-23")
 
-EfmodyBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Efmody",], "Total_raw_dose", "None", "total dose")
-
-DexamethasoneBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Dexamethasone",], "Total_raw_dose", "None", "total dose")
-
+PrednisoloneBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Prednisolone",], "Total_raw_dose", "None", "total dose prednisolone 23-25")
 ```
 
+```{r : med box plots standardised}
+# using MDBoxPlot function
+# don't need to do HC here since this is the medicine to which the others have been standardised.
+# also don't need to do Efmody since this is already equivalent.
 
-```{r : make stats}
+stand_DexamethasoneBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Dexamethasone",], "total_standardised_daily_dose_1_1", "None", "total standardised dose dexamethasone 22-23")
 
+stand_DexamethasoneBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Dexamethasone",], "total_standardised_daily_dose_1_1", "None", "total standardised dose dexamethasone 23-25")
 
+stand_PrednisoloneBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Prednisolone",], "total_standardised_daily_dose_1_1", "None", "total standardised dose prednisolone 22-23")
 
+stand_PrednisoloneBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Prednisolone",], "total_standardised_daily_dose_1_1", "None", "total standardised dose prednisolone 23-25")
 ```
-
 
 ```{r : dose time histograms}
+# using medTimePlot function
+# this is for all data across all centres
 
-# need to pivot data to make histogram with multiple dose time data on it
+Dex_dose_times_22_23 <- medTimePlot(therapy_22_23_single, "Dexamethasone", "Dexamethasone dose timing (22-23)")
 
-timings_long_set_up <- therapy_22_23_single %>%
-  pivot_longer(cols = c(dose_time_hours_1, dose_time_hours_2, dose_time_hours_3, dose_time_hours_4),
-               names_to = c("dose_number"),
-               values_to = "time")
+Dex_dose_times_23_25 <- medTimePlot(therapy_23_25_single, "Dexamethasone", "Dexamethasone dose timing (23-25)")
 
-timings_long <- timings_long_set_up[, c("dose_number", "time", "Medicine_1.x", "Medicine_2.x", "Medicine_3.x", "Medicine_4.x")]
+Efmody_dose_times_22_23 <- medTimePlot(therapy_22_23_single, "Efmody", "Efmody dose timing (22-23)")
 
-HC_dose_times <- timings_long %>%
-  filter(timings_long$Medicine_1.x == "Hydrocortisone") %>%
-  ggplot(aes(x = time, fill = dose_number)) +
-  geom_histogram()
+Efmody_dose_times_23_25 <- medTimePlot(therapy_23_25_single, "Efmody", "Efmody dose timing (23-25)")
 
+HC_dose_times_22_23 <- medTimePlot(therapy_22_23_single, "Hydrocortisone", "HC dose timing (22-23)")
+
+HC_dose_times_23_25 <- medTimePlot(therapy_23_25_single, "Hydrocortisone", "HC dose timing (23-25)")
+
+Pred_dose_times_22_23 <- medTimePlot(therapy_22_23_single, "Prednisolone", "Pred dose timing (22-23)")
+
+Pred_dose_times_23_25 <- medTimePlot(therapy_23_25_single, "Prednisolone", "Pred dose timing (23-35)")
+```
+
+```{r : raw dose stats}
+raw_HC_doses_22_23 <- summariseMed(therapy_22_23_single, "Hydrocortisone", "raw")
+
+raw_HC_doses_23_25 <- summariseMed(therapy_23_25_single, "Hydrocortisone", "raw")
+
+raw_pred_doses_22_23 <- summariseMed(therapy_22_23_single, "Prednisolone", "raw")
+
+raw_pred_doses_23_25 <- summariseMed(therapy_23_25_single, "Prednisolone", "raw")
+
+raw_efmody_doses_22_23 <- summariseMed(therapy_22_23_single, "Efmody", "raw")
+
+raw_efmody_doses_23_25 <- summariseMed(therapy_23_25_single, "Efmody", "raw")
+
+raw_dex_doses_22_23 <- summariseMed(therapy_22_23_single, "Dexamethasone", "raw")
+
+raw_dex_doses_23_25 <- summariseMed(therapy_23_25_single, "Dexamethasone", "raw")
+```
+
+```{r : standardised dose stats}
+stan_pred_doses_22_23 <- summariseMed(therapy_22_23_single, "Prednisolone", "standardised")
+
+stan_pred_doses_23_25 <- summariseMed(therapy_23_25_single, "Prednisolone", "standardised")
+
+stan_dex_doses_22_23 <- summariseMed(therapy_22_23_single, "Dexamethasone", "standardised")
+
+stan_dex_doses_23_25 <- summariseMed(therapy_23_25_single, "Dexamethasone", "standardised")
+```
+
+```{r}
+therapy_22_23_single$Centre.ID.x <- as.factor(therapy_22_23_single$Centre.ID.x)
+
+dose_trends_22_23 <- ggplot(therapy_22_23_single, aes(x = Centre.ID.x, y = total_standardised_daily_dose_1_1, fill = Medicine_1.x)) +
+  geom_boxplot() +
+  theme_minimal() +
+  geom_point(position = position_dodge(width = 0.75))
+
+therapy_23_25_single$Centre.ID.x <- as.factor(therapy_23_25_single$Centre.ID.x)
+
+dose_trends_23_25 <- ggplot(therapy_23_25_single, aes(x = Centre.ID.x, y = total_standardised_daily_dose_1_1, fill = Medicine_1.x)) +
+  geom_boxplot() +
+  theme_minimal() +
+  geom_point(position = position_dodge(width = 0.75)) +
+  ylim(0,80)
+
+```
+
+```{r}
+HC_single_test <- therapy_23_25_single[therapy_23_25_single$Medicine_1.y == "Hydrocortisone",]
 
 ```
 
 
 
-p <- data %>%
-  ggplot( aes(x=value, fill=type)) +
-    geom_histogram( color="#e9ecef", alpha=0.6, position = 'identity') +
-    scale_fill_manual(values=c("#69b3a2", "#404080")) +
-    theme_ipsum() +
-    labs(fill="")
+```{r : script completion message}
+print("Script complete")
+
+```

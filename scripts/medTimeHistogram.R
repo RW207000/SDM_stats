@@ -1,4 +1,4 @@
-medTimePlot <- function(therapy_data, medicine){
+medTimePlot <- function(therapy_data, medicine, ttl){
   
   medData <- therapy_data[therapy_data$Medicine_1.x == medicine,]
   
@@ -20,7 +20,10 @@ medTimePlot <- function(therapy_data, medicine){
   
   dosePlot <- timings_long %>%
     ggplot(aes(x = time, fill = dose_number)) +
-    geom_histogram()
+    geom_histogram() +
+    theme_minimal() +
+    scale_fill_hue(labels = c("dose 1", "dose 2", "dose 3")) +
+    labs(title = ttl, x = "time")
   
   return(dosePlot)
   

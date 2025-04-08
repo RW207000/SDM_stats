@@ -18,7 +18,9 @@ MDBoxPlot <- function (MDS, Param, splitType, ttl) {
     geom_boxplot() +
     labs(title = ttl, x = "Centre ID", y = Param) +
     theme_minimal() +
-    scale_fill_manual(values = myColours)
+    scale_fill_manual(values = myColours) +
+    geom_point(position = position_dodge(width = 0.75),
+               aes(group = Centre.ID.x))
   
     } else if(splitType == "SBS") {
     
