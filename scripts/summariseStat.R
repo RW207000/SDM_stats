@@ -23,12 +23,12 @@ summariseMed <- function(minimalDataset, medicine, dose_type) {
   else if (dose_type == "standardised") {
     StatSummary <- medData %>%
       group_by(Centre.ID.x) %>%
-      summarise("mean" = mean(total_standardised_daily_dose_1_1, na.rm = T),
-                "median" = median(total_standardised_daily_dose_1_1, na.rm = T),
-                "SD" = sd(total_standardised_daily_dose_1_1, na.rm = T),
-                "min" = min(total_standardised_daily_dose_1_1, na.rm = T),
-                "max" = max(total_standardised_daily_dose_1_1, na.rm = T),
-                "n" = length(total_standardised_daily_dose_1_1[!is.na(total_standardised_daily_dose_1_1)])) %>%
+      summarise("mean" = mean(HC_equivalent_daily_dose_1_1, na.rm = T),
+                "median" = median(HC_equivalent_daily_dose_1_1, na.rm = T),
+                "SD" = sd(HC_equivalent_daily_dose_1_1, na.rm = T),
+                "min" = min(HC_equivalent_daily_dose_1_1, na.rm = T),
+                "max" = max(HC_equivalent_daily_dose_1_1, na.rm = T),
+                "n" = length(HC_equivalent_daily_dose_1_1[!is.na(HC_equivalent_daily_dose_1_1)])) %>%
       mutate_if(is.numeric, ~round(., 2)) 
     
   }

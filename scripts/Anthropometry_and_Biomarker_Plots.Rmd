@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 libraries
 ```{r : reading libraries, include= FALSE}
-packages <- c("tidyverse", "readxl", "dplyr", "magrittr", "mixtools", "emmeans", "readr","data.table", "lubridate", "ggplot2", "skimr", "ggstatsplot","summarytools", "knitr", "here", "ggthemes", "Amelia", "tidyr", "naniar", "stringr", "janitor", "ggbreak", "patchwork", "plotrix", "viridis", "hrbrthemes")
+packages <- c("tidyverse", "readxl", "dplyr", "magrittr", "mixtools", "emmeans", "readr","data.table", "lubridate", "ggplot2", "skimr", "ggstatsplot","summarytools", "knitr", "here", "ggthemes", "Amelia", "tidyr", "naniar", "stringr", "janitor", "ggbreak", "patchwork", "plotrix", "viridis", "hrbrthemes", "showtext")
 
 lapply(packages, library, character.only = TRUE)
 ```
@@ -38,6 +38,9 @@ Nov23_Feb25_minimal_dataset <- Nov23_Feb25_minimal_dataset [!Nov23_Feb25_minimal
 
 # colours
 myColours <- c("purple", "lightblue", "grey")
+
+# add font
+font_add(family = "Arial", regular = "Arial.ttf")
 ```
 
 
@@ -50,19 +53,10 @@ weight_22_23 <- MDBoxPlot(Nov22_Nov23_minimal_dataset, "Weight..kg.", "SBS", "We
 
 weight_23_25 <- MDBoxPlot(Nov23_Feb25_minimal_dataset, "Weight..kg.", "SBS", "Weight 23-25")
 
-BMI_22_23 <- MDBoxPlot(Nov22_Nov23_minimal_dataset, "BMI", "None", "BMI 22-23 (overall)")
+BMI_22_23 <- MDBoxPlot(Nov22_Nov23_minimal_dataset, "BMI", "SBS", "BMI 22-23 (overall)")
 
 BMI_23_25 <- MDBoxPlot(Nov23_Feb25_minimal_dataset, "BMI", "None", "BMI 23-25 (overall)")
 ```
-
-
-```{r : anthro stats}
-
-```
-
-
-
-
 
 
 
@@ -73,28 +67,29 @@ BMI_23_25 <- MDBoxPlot(Nov23_Feb25_minimal_dataset, "BMI", "None", "BMI 23-25 (o
 ```
 
 ```{r : biomarker plots}
+# I have manually added in the y axis breaks to condense empty space in plots
+
 testosterone_22_23 <- MDBoxPlot(Nov22_Nov23_minimal_dataset, "Total.testosterone.value", "NTEO", "Testosterone 22-23")
 
-testosterone_23_25 <- MDBoxPlot(Nov23_Feb25_minimal_dataset, "Total.testosterone.value", "NTEO", "Testosterone 23-25")
+testosterone_23_25 <- MDBoxPlot(Nov23_Feb25_minimal_dataset, "Total.testosterone.value", "SBS", "Testosterone 23-25")
 
-renin_22_23 <- MDBoxPlot(Nov22_Nov23_minimal_dataset, "Renin.plasma.activity", "NTEO", "Renin plasma activiy 22-23")
+renin_22_23 <- MDBoxPlot(Nov22_Nov23_minimal_dataset, "Renin.plasma.activity", "SBS", "Renin plasma activiy 22-23")
 
-renin_23_25 <- MDBoxPlot(Nov23_Feb25_minimal_dataset, "Renin.plasma.activity", "NTEO", "Renin plasma activiy 23-25")
+renin_23_25 <- MDBoxPlot(Nov23_Feb25_minimal_dataset, "Renin.plasma.activity", "SBS", "Renin plasma activiy 23-25")
 
-OHP_22_23 <- MDBoxPlot(Nov22_Nov23_minimal_dataset, "X17.OHP.value", "SBS", "17 OHP values 22-23")
+OHP_22_23 <- MDBoxPlot(Nov22_Nov23_minimal_dataset, "X17.OHP.value", "SBS", "17 OHP values 22-23") + scale_y_break(c(60, 80), scale = 0.25)
 
-OHP_23_25 <- MDBoxPlot(Nov23_Feb25_minimal_dataset, "X17.OHP.value", "SBS", "17 OHP values 23-25")
+OHP_23_25 <- MDBoxPlot(Nov23_Feb25_minimal_dataset, "X17.OHP.value", "SBS", "17 OHP values 23-25") + scale_y_break(c(50, 100), scale = 0.25)
 
-Andro_22_23 <- MDBoxPlot(Nov22_Nov23_minimal_dataset, "Androstenedione.value", "NTEO", "Andro values 22-23")
+andro_22_23 <- MDBoxPlot(Nov22_Nov23_minimal_dataset, "Androstenedione.value", "SBS", "Andro values 22-23") + scale_y_break(c(25, 35), scale = 0.25)
 
-Andro_23_25 <- MDBoxPlot(Nov23_Feb25_minimal_dataset, "Androstenedione.value", "NTEO", "Andro values 23_25")
+andro_23_25 <- MDBoxPlot(Nov23_Feb25_minimal_dataset, "Androstenedione.value", "SBS", "Andro values 23_25") + scale_y_break(c(25, 30, 31, 50, 51, 65, 66, 130), scale = 0.25)
 ```
 
 
-
-
-
-
+```{r : end of script message}
+print("Script complete")
+```
 
 
 

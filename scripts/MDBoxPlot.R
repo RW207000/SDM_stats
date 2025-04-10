@@ -15,9 +15,9 @@ MDBoxPlot <- function (MDS, Param, splitType, ttl) {
 
   #box plot
   graph <- ggplot(data = paramData, aes(x = Centre.ID.x, y = param)) +
-    geom_boxplot() +
+    geom_boxplot(position = position_dodge(preserve='single')) +
     labs(title = ttl, x = "Centre ID", y = Param) +
-    theme_minimal() +
+    theme_classic() +
     scale_fill_manual(values = myColours) +
     geom_point(position = position_dodge(width = 0.75),
                aes(group = Centre.ID.x))
@@ -37,10 +37,12 @@ MDBoxPlot <- function (MDS, Param, splitType, ttl) {
     paramData <- paramData %>% rename(param = 3)
     
     #box plot
-    graph <- ggplot(data = paramData, aes(x = Centre.ID.x, y = param, fill = Sex.at.birth.x)) +
-      geom_boxplot() +
+    graph <- ggplot(data = paramData, aes(x = Centre.ID.x, y = param, fill = Sex.at.birth.x, col = Sex.at.birth.x)) +
+      geom_boxplot(position = position_dodge2(preserve='single'),
+                   ) +
       labs(title = ttl, x = "Centre ID", y = Param) +
-      theme_minimal() +
+      theme_classic() +
+      theme() +
       scale_fill_manual(values = myColours) +
       geom_point(position = position_dodge(width = 0.75),
                  aes(group = Sex.at.birth.x))
@@ -59,10 +61,11 @@ MDBoxPlot <- function (MDS, Param, splitType, ttl) {
     paramData <- paramData %>% rename(param = 3)
     
     #box plot
-    graph <- ggplot(data = paramData, aes(x = Centre.ID.x, y = param, fill = Sex.at.birth.x)) +
-      geom_boxplot() +
+    graph <- ggplot(data = paramData,
+                    aes(x = Centre.ID.x, y = param,fill = Sex.at.birth.x, col = Sex.at.birth.x)) +
+      geom_boxplot(position = position_dodge2(preserve='single')) +
       labs(title = ttl, x = "Centre ID", y = Param) + 
-      theme_minimal() +
+      theme_classic() +
       scale_fill_manual(values = myColours) +
       facet_wrap(~ Sex.at.birth.x) +
       geom_point()
