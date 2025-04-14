@@ -20,7 +20,7 @@ summariseMed <- function(minimalDataset, medicine, dose_type) {
     mutate_if(is.numeric, ~round(., 2))
   }
   
-  else if (dose_type == "standardised") {
+  else if (dose_type == "equiv") {
     StatSummary <- medData %>%
       group_by(Centre.ID.x) %>%
       summarise("mean" = mean(HC_equivalent_daily_dose_1_1, na.rm = T),
@@ -33,6 +33,19 @@ summariseMed <- function(minimalDataset, medicine, dose_type) {
     
   }
     
+  else if (dose_type == "BSA") {
+    StatSummary <- medData %>%
+      group_by(Centre.ID.x) %>%
+      summarise("mean" = mean(HC_equivalent_daily_dose_per_BSA, na.rm = T),
+                "median" = median(HC_equivalent_daily_dose_per_BSA, na.rm = T),
+                "SD" = sd(HC_equivalent_daily_dose_per_BSA, na.rm = T),
+                "min" = min(HC_equivalent_daily_dose_per_BSA, na.rm = T),
+                "max" = max(HC_equivalent_daily_dose_per_BSA, na.rm = T),
+                "n" = length(HC_equivalent_daily_dose_per_BSA[!is.na(HC_equivalent_daily_dose_per_BSA)])) %>%
+      mutate_if(is.numeric, ~round(., 2)) 
+  
+  }
+  
   else {
     print("incorrect dose type")
   }
