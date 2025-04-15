@@ -73,7 +73,7 @@ MDBoxPlot <- function (MDS, Param, splitType, ttl) {
   } else {
     print("Wrong split type, use None, SBS, or NTEO")
   }
-  
+
   
 
   
