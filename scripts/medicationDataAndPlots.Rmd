@@ -111,38 +111,42 @@ therapy_23_25_combined <- therapy_23_25[therapy_23_25$`single/combined` == "comb
 # make therapy 22-25
 all_therapy_22_25_single <- rbind(therapy_22_23_single, therapy_23_25_single)
 all_therapy_22_25_combined <- rbind(therapy_22_23_combined, therapy_23_25_combined)
+
+write.csv(all_therapy_22_25_single, "C:/Users/md1rwe/Documents/Data extractions from I-CAH/Feb 2025/I-CAH_data_Feb_2025/all_therapy_22-25_single.csv", row.names = F)
+
+
 ```
 
 ```{r : med box plots raw values}
 # using MDBoxPlot function
 
 ## Dexamethasone
-DexamethasoneBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Dexamethasone",], "Total_raw_dose", "None", "total dose dexamethasone 22-23")
+DexamethasoneBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Dexamethasone",], "Total_raw_dose", "None", "total daily dose dexamethasone 22-23")
 
-DexamethasoneBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Dexamethasone",], "Total_raw_dose", "None", "total dose dexamethasone 23-25")
+DexamethasoneBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Dexamethasone",], "Total_raw_dose", "None", "total daily dose dexamethasone 23-25")
 
-DexamethasoneBoxPlot_all <- MDBoxPlot(all_therapy_22_25_single[all_therapy_22_25_single$Medicine_1.x == "Dexamethasone",], "Total_raw_dose", "None", "total dose dexamethasone 22-25")
+DexamethasoneBoxPlot_all <- MDBoxPlot(all_therapy_22_25_single[all_therapy_22_25_single$Medicine_1.x == "Dexamethasone",], "Total_raw_dose", "None", "total daily dose dexamethasone 22-25")
 
 ## Efmody
-EfmodyBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Efmody",], "Total_raw_dose", "None", "total dose efmody 22-23")
+EfmodyBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Efmody",], "Total_raw_dose", "None", "total daily dose efmody 22-23")
 
-EfmodyBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Efmody",], "Total_raw_dose", "None", "total dose efmody 23-25")
+EfmodyBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Efmody",], "Total_raw_dose", "None", "total daily dose efmody 23-25")
 
-EfmodyBoxPlot_all <- MDBoxPlot(all_therapy_22_25_single[all_therapy_22_25_single$Medicine_1.x == "Efmody",], "Total_raw_dose", "None", "total dose efmody 22-25")
+EfmodyBoxPlot_all <- MDBoxPlot(all_therapy_22_25_single[all_therapy_22_25_single$Medicine_1.x == "Efmody",], "Total_raw_dose", "None", "total daily dose efmody 22-25")
 
 ## Hydrocortisone
-HydrocortisoneBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Hydrocortisone",], "Total_raw_dose", "None", "total dose hydro 22-23")
+HydrocortisoneBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Hydrocortisone",], "Total_raw_dose", "None", "total daily dose hydro 22-23")
 
-HydrocortisoneBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Hydrocortisone",], "Total_raw_dose", "None", "total dose hydro 23-25")
+HydrocortisoneBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Hydrocortisone",], "Total_raw_dose", "None", "total daily dose hydro 23-25")
 
-HydrocortisoneBoxPlot_all <- MDBoxPlot(all_therapy_22_25_single[all_therapy_22_25_single$Medicine_1.x == "Hydrocortisone",], "Total_raw_dose", "None", "total dose hydro 22-25")
+HydrocortisoneBoxPlot_all <- MDBoxPlot(all_therapy_22_25_single[all_therapy_22_25_single$Medicine_1.x == "Hydrocortisone",], "Total_raw_dose", "None", "total daily dose hydro 22-25")
 
 ## Prednisolone
-PrednisoloneBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Prednisolone",], "Total_raw_dose", "None", "total dose prednisolone 22-23")
+PrednisoloneBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Prednisolone",], "Total_raw_dose", "None", "total daily dose prednisolone 22-23")
 
-PrednisoloneBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Prednisolone",], "Total_raw_dose", "None", "total dose prednisolone 23-25")
+PrednisoloneBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Prednisolone",], "Total_raw_dose", "None", "total daily dose prednisolone 23-25")
 
-PrednisoloneBoxPlot_23_25 <- MDBoxPlot(all_therapy_22_25_single[all_therapy_22_25_single$Medicine_1.x == "Prednisolone",], "Total_raw_dose", "None", "total dose prednisolone 22-25")
+PrednisoloneBoxPlot_23_25 <- MDBoxPlot(all_therapy_22_25_single[all_therapy_22_25_single$Medicine_1.x == "Prednisolone",], "Total_raw_dose", "None", "total daily dose prednisolone 22-25")
 ```
 
 ```{r : med box plots HC equivalent}
@@ -150,52 +154,52 @@ PrednisoloneBoxPlot_23_25 <- MDBoxPlot(all_therapy_22_25_single[all_therapy_22_2
 # don't need to do HC here since this is the medicine to which the others have been standardised.
 # also don't need to do Efmody since this is already equivalent.
 
-equiv_DexamethasoneBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Dexamethasone",], "HC_equivalent_daily_dose_1_1", "None", "HC equivalent dose dexamethasone 22-23")
+equiv_DexamethasoneBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Dexamethasone",], "HC_equivalent_daily_dose_1_1", "None", "HC equivalent daily dose dexamethasone 22-23")
 
-equiv_DexamethasoneBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Dexamethasone",], "HC_equivalent_daily_dose_1_1", "None", "HC equivalent dose dexamethasone 23-25")
+equiv_DexamethasoneBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Dexamethasone",], "HC_equivalent_daily_dose_1_1", "None", "HC equivalent daily dose dexamethasone 23-25")
 
-equiv_DexamethasoneBoxPlot_all <- MDBoxPlot(all_therapy_22_25_single[all_therapy_22_25_single$Medicine_1.x == "Dexamethasone",], "HC_equivalent_daily_dose_1_1", "None", "HC equivalent dose dexamethasone 22-25")
+equiv_DexamethasoneBoxPlot_all <- MDBoxPlot(all_therapy_22_25_single[all_therapy_22_25_single$Medicine_1.x == "Dexamethasone",], "HC_equivalent_daily_dose_1_1", "None", "HC equivalent daily dose dexamethasone 22-25")
 
-equiv_PrednisoloneBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Prednisolone",], "HC_equivalent_daily_dose_1_1", "None", "HC equivalent dose prednisolone 22-23")
+equiv_PrednisoloneBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Prednisolone",], "HC_equivalent_daily_dose_1_1", "None", "HC equivalent daily dose prednisolone 22-23")
 
-equiv_PrednisoloneBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Prednisolone",], "HC_equivalent_daily_dose_1_1", "None", "HC equivalent dose prednisolone 23-25")
+equiv_PrednisoloneBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Prednisolone",], "HC_equivalent_daily_dose_1_1", "None", "HC equivalent daily dose prednisolone 23-25")
 
-equiv_PrednisoloneBoxPlot_all <- MDBoxPlot(all_therapy_22_25_single[all_therapy_22_25_single$Medicine_1.x == "Prednisolone",], "HC_equivalent_daily_dose_1_1", "None", "HC equivalent dose prednisolone 22-25")
+equiv_PrednisoloneBoxPlot_all <- MDBoxPlot(all_therapy_22_25_single[all_therapy_22_25_single$Medicine_1.x == "Prednisolone",], "HC_equivalent_daily_dose_1_1", "None", "HC equivalent daily dose prednisolone 22-25")
 ```
 
 ```{r : med box plots dose per BSA values}
 # using MDBoxPlot function
 
 ## Dexamethasone
-HC_equiv_BSA_DexamethasoneBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Dexamethasone",], "HC_equivalent_daily_dose_per_BSA", "None", "HC equiv per BSA dose dexamethasone 22-23")
+HC_equiv_BSA_DexamethasoneBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Dexamethasone",], "HC_equivalent_daily_dose_per_BSA", "None", "HC equiv per BSA total daily dose dexamethasone 22-23")
 
-HC_equiv_BSA_DexamethasoneBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Dexamethasone",], "HC_equivalent_daily_dose_per_BSA", "None", "HC equiv per BSA dose dexamethasone 23-25")
+HC_equiv_BSA_DexamethasoneBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Dexamethasone",], "HC_equivalent_daily_dose_per_BSA", "None", "HC equiv per BSA total daily dose dexamethasone 23-25")
 
-HC_equiv_BSA_DexamethasoneBoxPlot_all <- MDBoxPlot(all_therapy_22_25_single[all_therapy_22_25_single$Medicine_1.x == "Dexamethasone",], "HC_equivalent_daily_dose_per_BSA", "None", "HC equiv per BSA dose dexamethasone 22-25")
+HC_equiv_BSA_DexamethasoneBoxPlot_all <- MDBoxPlot(all_therapy_22_25_single[all_therapy_22_25_single$Medicine_1.x == "Dexamethasone",], "HC_equivalent_daily_dose_per_BSA", "None", "HC equiv per BSA total daily dose dexamethasone 22-25")
 
 
 ## Efmody
-HC_equiv_BSA_EfmodyBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Efmody",], "HC_equivalent_daily_dose_per_BSA", "None", "HC equiv per BSA dose efmody 22-23")
+HC_equiv_BSA_EfmodyBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Efmody",], "HC_equivalent_daily_dose_per_BSA", "None", "HC equiv per BSA total daily dose efmody 22-23")
 
-HC_equiv_BSA_EfmodyBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Efmody",], "HC_equivalent_daily_dose_per_BSA", "None", "HC equiv per BSA dose efmody 23-25")
+HC_equiv_BSA_EfmodyBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Efmody",], "HC_equivalent_daily_dose_per_BSA", "None", "HC equiv per BSA total daily dose efmody 23-25")
 
-HC_equiv_BSA_EfmodyBoxPlot_23_25 <- MDBoxPlot(all_therapy_22_25_single[all_therapy_22_25_single$Medicine_1.x == "Efmody",], "HC_equivalent_daily_dose_per_BSA", "None", "HC equiv per BSA dose efmody 22-25")
+HC_equiv_BSA_EfmodyBoxPlot_22_25 <- MDBoxPlot(all_therapy_22_25_single[all_therapy_22_25_single$Medicine_1.x == "Efmody",], "HC_equivalent_daily_dose_per_BSA", "None", "HC equiv per BSA total daily dose efmody 22-25")
 
 
 ## Hydrocortisone
-HC_equiv_BSA_HydrocortisoneBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Hydrocortisone",], "HC_equivalent_daily_dose_per_BSA", "SBS", "HC per BSA dose hydro 22-23")
+HC_equiv_BSA_HydrocortisoneBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Hydrocortisone",], "HC_equivalent_daily_dose_per_BSA", "None", "HC per BSA total daily dose hydro 22-23")
 
-HC_equiv_BSA_HydrocortisoneBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Hydrocortisone",], "HC_equivalent_daily_dose_per_BSA", "None", "HC per BSA dose hydro 23-25")
+HC_equiv_BSA_HydrocortisoneBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Hydrocortisone",], "HC_equivalent_daily_dose_per_BSA", "None", "HC per BSA total daily dose hydro 23-25") + ylim(0,25)
 
-HC_equiv_BSA_HydrocortisoneBoxPlot_23_25 <- MDBoxPlot(all_therapy_22_25_single[all_therapy_22_25_single$Medicine_1.x == "Hydrocortisone",], "HC_equivalent_daily_dose_per_BSA", "None", "HC per BSA dose hydro 22-25")
+HC_equiv_BSA_HydrocortisoneBoxPlot_22_25 <- MDBoxPlot(all_therapy_22_25_single[all_therapy_22_25_single$Medicine_1.x == "Hydrocortisone",], "HC_equivalent_daily_dose_per_BSA", "None", "HC per BSA total daily dose hydro 22-25") + ylim(0,25) +   annotate('rect', xmin=-Inf, xmax=Inf, ymin=10, ymax=15, alpha=.5, fill='grey') + geom_hline(yintercept = 11, colour = "red")
 
 
 ## Prednisolone
-HC_equiv_BSA_PrednisoloneBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Prednisolone",], "HC_equivalent_daily_dose_per_BSA", "None", "HC equiv per BSA dose prednisolone 22-23")
+HC_equiv_BSA_PrednisoloneBoxPlot_22_23 <- MDBoxPlot(therapy_22_23_single[therapy_22_23_single$Medicine_1.x == "Prednisolone",], "HC_equivalent_daily_dose_per_BSA", "None", "HC equiv per BSA total daily dose prednisolone 22-23")
 
-HC_equiv_BSA_PrednisoloneBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Prednisolone",], "HC_equivalent_daily_dose_per_BSA", "None", "HC equiv per BSA dose prednisolone 23-25")
+HC_equiv_BSA_PrednisoloneBoxPlot_23_25 <- MDBoxPlot(therapy_23_25_single[therapy_23_25_single$Medicine_1.x == "Prednisolone",], "HC_equivalent_daily_dose_per_BSA", "None", "HC equiv per BSA total daily dose prednisolone 23-25")
 
-HC_equiv_BSA_PrednisoloneBoxPlot_23_25 <- MDBoxPlot(all_therapy_22_25_single[all_therapy_22_25_single$Medicine_1.x == "Prednisolone",], "HC_equivalent_daily_dose_per_BSA", "None", "HC equiv per BSA dose prednisolone 22-25")
+HC_equiv_BSA_PrednisoloneBoxPlot_22_25 <- MDBoxPlot(all_therapy_22_25_single[all_therapy_22_25_single$Medicine_1.x == "Prednisolone",], "HC_equivalent_daily_dose_per_BSA", "None", "HC equiv per BSA total daily dose prednisolone 22-25")  +   annotate('rect', xmin=-Inf, xmax=Inf, ymin=10, ymax=15, alpha=.5, fill='grey') + geom_hline(yintercept = 11, colour = "red")
 ```
 
 
@@ -284,7 +288,6 @@ equiv_BSA_pred_doses_all <- summariseMed(all_therapy_22_25_single, "Prednisolone
 ```
 
 
-
 ```{r : therapy dose trends}
 therapy_22_23_single$Centre.ID.x <- as.factor(therapy_22_23_single$Centre.ID.x)
 therapy_23_25_single$Centre.ID.x <- as.factor(therapy_23_25_single$Centre.ID.x)
@@ -310,7 +313,7 @@ therapy_dose_trends_all <- ggplot(all_therapy_22_25_single, aes(x = Centre.ID.x,
 ```
 
 
-```{r : therapy dose trends with facet wrap}
+```{r : therapy dose trends with facet wrap - HC equivalent total daily doses}
 therapy_dose_trends_22_23 <- ggplot(therapy_22_23_single, aes(x = Centre.ID.x, y = HC_equivalent_daily_dose_1_1, fill = Medicine_1.x)) +
   geom_boxplot() +
   ggtitle("therapy dose trends 22-23") +
@@ -327,16 +330,72 @@ therapy_dose_trends_23_25 <- ggplot(therapy_23_25_single, aes(x = Centre.ID.x, y
 
 therapy_dose_trends_all <- ggplot(all_therapy_22_25_single, aes(x = Centre.ID.x, y = HC_equivalent_daily_dose_1_1, fill = Medicine_1.x)) +
   geom_boxplot() +
-  ggtitle("therapy dose trends 23-25") +
+  ggtitle("therapy dose trends 22-25") +
   facet_wrap(~ Medicine_1.x, axes = "all", axis.labels = "all") +
   theme_minimal() +
   geom_point(position = position_dodge(width = 0.75))
 ```
 
+```{r : HC equiv per BSA doses}
+perBSA_therapy_dose_trends_all <- ggplot(all_therapy_22_25_single, aes(x = Centre.ID.x, y = HC_equivalent_daily_dose_per_BSA, fill = Medicine_1.x)) +
+  geom_boxplot() +
+  ggtitle("HC equivalent total daily dose per BSA 22-25") +
+  facet_wrap(~ Medicine_1.x, axes = "all", axis.labels = "all") +
+  theme_classic() +
+  geom_point(position = position_dodge(width = 0.75)) +
+  theme(axis.text.x = element_text(angle=90)) +
+  ylim(0,50) +   annotate('rect', xmin=-Inf, xmax=Inf, ymin=10, ymax=15, alpha=.5, fill='grey') + geom_hline(yintercept = 11, colour = "red")
+
+perBSA_therapy_dose_trends_all_2 <- ggplot(all_therapy_22_25_single, aes(x = Centre.ID.x, y = HC_equivalent_daily_dose_per_BSA)) +
+  geom_boxplot() +
+  ggtitle("HC equivalent total daily dose per BSA 22-25") +
+  theme_classic() +
+  geom_point(position = position_dodge(width = 0.75)) +
+  ylim(0,50)  +   annotate('rect', xmin=-Inf, xmax=Inf, ymin=10, ymax=15, alpha=.5, fill='grey') + geom_hline(yintercept = 11, colour = "red")
+
+zoom_perBSA_therapy_dose_trends_all <- perBSA_therapy_dose_trends_all + coord_cartesian(ylim = c(0,20))
+
+zoom_perBSA_therapy_dose_trends_all_2 <- perBSA_therapy_dose_trends_all_2 + coord_cartesian(ylim = c(0,20))
+```
+
+```{r : total daily dose vs BMI}
+# HC equiv total daily dose vs BMI
+test <- ggplot(all_therapy_22_25_single, aes(x = BMI , y = HC_equivalent_daily_dose_1_1)) +
+  geom_bin2d() +
+  theme_classic()
+
+# HC equiv total daily dose vs weight
+test2 <- ggplot(all_therapy_22_25_single, aes(x = Weight..kg. , y = HC_equivalent_daily_dose_1_1)) +
+  geom_bin2d() +
+  theme_classic()
+```
+
 ```{r}
+# how many patients are on single and combined therapies per centre
+
+
 
 
 ```
+
+
+
+
+```{r : checks}
+HC_equiv_BSA_under_8_to_check <- subset(all_therapy_22_25_single, HC_equivalent_daily_dose_per_BSA < 8)
+write.csv(HC_equiv_BSA_under_8_to_check, "C:/Users/md1rwe/Documents/Data extractions from I-CAH/Feb 2025/I-CAH_data_Feb_2025/HC_equiv_BSA_under_8_to_check.csv", row.names = F)
+
+# individual HC doses <5mg
+HC_meds <- subset(all_therapy_22_25_single, Medicine_1.x == "Hydrocortisone")
+HC_doses_to_check <- subset(HC_meds, Dose_1 < 5 | Dose_2 <5 | Dose_3 <5 | Dose_4 <5)
+write.csv(HC_doses_to_check, "C:/Users/md1rwe/Documents/Data extractions from I-CAH/Feb 2025/I-CAH_data_Feb_2025/HC_doses_to_check.csv", row.names = F)
+
+# individual Pred doses of >5mg
+Pred_meds <- subset(all_therapy_22_25_single, Medicine_1.x == "Prednisolone")
+Pred_doses_to_check <- subset(Pred_meds, Dose_1 >5 | Dose_2 >5 | Dose_3 >5 | Dose_4 >5)
+write.csv(Pred_doses_to_check, "C:/Users/md1rwe/Documents/Data extractions from I-CAH/Feb 2025/I-CAH_data_Feb_2025/Pred_doses_to_check.csv", row.names = F)
+```
+
 
 ```{r : script completion message}
 print("Script complete")
